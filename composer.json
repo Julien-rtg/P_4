@@ -1,10 +1,13 @@
 {
-    "name": "utilisateur/p_4",
-    "authors": [
-        {
-            "name": "Julien-Rtg",
-            "email": "julien.rittl@gmail.com"
+    "autoload": {
+        "psr-4": {
+            "Elements\\": "elements/",
+            "Controllers\\": "controllers/",
+            "Router\\": "router/"
         }
-    ],
-    "require": {}
+    },
+    "require": {
+        "twig/twig": "2.0",
+        "altorouter/altorouter": "^2.0"
+    }
 }
