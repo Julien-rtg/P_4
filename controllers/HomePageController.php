@@ -1,21 +1,16 @@
 <?php
 namespace Controllers;
 
-use Twig_Environment;
-use Twig_Loader_Filesystem;
+use App\Controllers\MainController;
 
-class HomePageController {
 
-    public $twig_loader;
-    public $twig;
+class HomePageController extends MainController {
 
-    public function __construct(){
-        $this->twig_loader = new Twig_Loader_Filesystem('./views');
-        $this->twig = new Twig_Environment($this->twig_loader);
-    }
-
+    // $this->main_view = ./views/main.html/twig and is define in MainController
     public function homePage(){
-        echo $this->twig->render('HomePage.html.twig');
+        echo $this->twig->render($this->main_view, [
+            'body' => 'twig/HomePage.html.twig'
+        ]);
     }
 
 }
