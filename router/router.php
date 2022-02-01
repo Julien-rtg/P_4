@@ -23,19 +23,17 @@ class Router {
             $this->home->homePage();
         });
 
+        //
 
         $match = $this->router->match();
         $this->checkMatch($match);
-        
     }
 
     public function checkMatch($match){
-        if (
-            is_array($match) && is_callable($match['target'])
-        ) {
+        if (is_array($match) && is_callable($match['target'])) {
             call_user_func_array($match['target'], $match['params']);
         } else {
-            // no route was matched
+            // no route was matched throw 404
             header($_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
         }
     }
@@ -47,6 +45,3 @@ class Router {
 // $router->map('GET|POST', '/users/[i:id]/', function($id) {
 //   require __DIR__ . '/views/user/details.php';
 // }, 'user-details');
-
-// echo URL to user-details page for ID 5
-// echo $router->generate('user-details', ['id' => 5]); // Output: "/users/5"
