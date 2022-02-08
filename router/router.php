@@ -6,8 +6,8 @@ use Controllers\HomePageController;
 
 class Router {
 
-    public $router;
-    public $home;
+    private $router;
+    private $home;
 
     public function __construct(){
         $this->router = new AltoRouter();
@@ -19,11 +19,11 @@ class Router {
         // echo $uri; // Outputs: URI
         
         // map homepage
-        $this->router->map('GET', '/p_4/', function () {
+        $this->router->map('GET|POST', '/p_4/', function () {
             $this->home->homePage();
         });
 
-        //
+        // 
 
         $match = $this->router->match();
         $this->checkMatch($match);
