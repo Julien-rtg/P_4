@@ -3,8 +3,7 @@
         "psr-4": {
             "Elements\\": "elements/",
             "Controllers\\": "controllers/",
-            "Router\\": "router/",
-            "App\\": "core/"
+            "Router\\": "router/"
         }
     },
     "require": {
