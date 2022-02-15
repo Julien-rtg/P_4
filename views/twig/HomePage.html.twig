@@ -1,5 +1,16 @@
 <div class="container">
-    <h2 class="text-center">Nous contacter</h2>
+    <h2 class="text-center mt-3 mb-3">Nous contacter</h2>
+    {% if mail == 'success' %}
+        <div class="alert alert-success" role="alert">
+            Email envoyé !
+        </div>
+    {% elseif mail == 'error' %}
+        <div class="alert alert-danger" role="alert">
+            Erreur lors de l'envoi d'email
+        </div>
+    {% endif %}
+    
+    
     <form action="" method="POST" novalidate>
         <div class="row mt-5">
             <div class="col">

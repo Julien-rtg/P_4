@@ -12,7 +12,6 @@ class HomePageController extends MainController {
             if(!$form['errors']){
                 $mail = $this->mail->sendMail($form['form']);
             }
-            // var_dump($form);
         }
 
         $this->renderHomePage($form ?? null, $mail ?? null);
@@ -44,7 +43,7 @@ class HomePageController extends MainController {
                     $form[$key] = $value;
                 }
             } else {
-                switch($key){ // ON FAIT UN SWITCH POUR TRADUIRE LE NOM DE L'INPUT EN FRANCAIS
+                switch($key){ // ON FAIT UN SWITCH POUR LES MSGS D'ERREURS
                     case 'first_name':
                         $errors[$key] = 'Veuillez renseigner votre nom';
                         break;
