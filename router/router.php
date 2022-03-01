@@ -2,7 +2,10 @@
 namespace Router;
 
 use AltoRouter;
-use Controllers\HomePageController;
+use Controllers\{
+    HomePageController, 
+    Page404Controller
+};
 
 class Router {
 
@@ -12,6 +15,7 @@ class Router {
     public function __construct(){
         $this->router = new AltoRouter();
         $this->home = new HomePageController();
+        $this->page_404 = new Page404Controller();
     }
 
     public function routeMap(){
@@ -23,8 +27,6 @@ class Router {
             $this->home->homePage();
         });
 
-        // 
-
         $match = $this->router->match();
         $this->checkMatch($match);
     }
@@ -34,7 +36,8 @@ class Router {
             call_user_func_array($match['target'], $match['params']);
         } else {
             // no route was matched throw 404
-            header($_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
+            // header($_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
+            $this->page_404->renderPage404();
         }
     }
 
