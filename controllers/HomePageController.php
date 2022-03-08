@@ -32,17 +32,32 @@ class HomePageController extends MainController {
         $form = [];
         foreach($formData as $key=>$value){
             $value = htmlspecialchars($value);
-            if($value){
-                if($key == 'email'){
+            if($value){ // SI VALEUR
+                if($key == 'email'){ // REGEX MAIL
                     if (filter_var($value, FILTER_VALIDATE_EMAIL)) {
                         $form[$key] = $value;
                     } else {
                         $errors[$key] = 'Veuillez renseigner une email valide';
                     }
-                }else {
-                    $form[$key] = $value;
+                }else { // ON REGARDE LA TAILLE DES VALEURS
+                    switch ($key) { // ON FAIT UN SWITCH POUR LES MSGS D'ERREURS
+                        case 'first_name':
+                            strlen($value) > 30 ? $errors[$key] = 'Votre nom est trop long' : $form[$key] = $value;
+                            break;
+                        case 'last_name':
+                            strlen($value) > 30 ? $errors[$key] = 'Votre prénom est trop long' : $form[$key] = $value;
+                            break;
+                        case 'object':
+                            strlen($value) > 255 ? $errors[$key] = 'Votre objet est trop long' : $form[$key] = $value;
+                            break;
+                        case 'message':
+                            strlen($value) > 65000 ? $errors[$key] = 'Votre message est trop long' : $form[$key] = $value;
+                            break;
+                        default:
+                            break;
+                    }
                 }
-            } else {
+            } else { // SI PAS DE VALEURS
                 switch($key){ // ON FAIT UN SWITCH POUR LES MSGS D'ERREURS
                     case 'first_name':
                         $errors[$key] = 'Veuillez renseigner votre nom';
