@@ -1,0 +1,12 @@
+<div class="container d-flex flex-column align-items-center">
+
+{% for post in posts %}
+
+    {{ post.titre }}
+    {{ post.chapo }}
+    <img src="./ressources/img/{{post.image}}">
+    {{ post.contenu }}
+    {{ post.date_maj }}
+
+{% endfor %}
+</div>

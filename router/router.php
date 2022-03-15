@@ -3,6 +3,7 @@ namespace Router;
 
 use AltoRouter;
 use Controllers\{
+    AllBlogPostsController,
     HomePageController, 
     Page404Controller
 };
@@ -10,12 +11,12 @@ use Controllers\{
 class Router {
 
     private $router;
-    private $home;
 
     public function __construct(){
         $this->router = new AltoRouter();
         $this->home = new HomePageController();
         $this->page_404 = new Page404Controller();
+        $this->allBlogPosts = new AllBlogPostsController();
     }
 
     public function routeMap(){
@@ -25,6 +26,11 @@ class Router {
         // map homepage
         $this->router->map('GET|POST', '/p_4/', function () {
             $this->home->homePage();
+        });
+
+        // map all blog posts
+        $this->router->map('GET|POST', '/p_4/posts', function () {
+            $this->allBlogPosts->allBlogPosts();
         });
 
         $match = $this->router->match();
