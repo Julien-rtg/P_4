@@ -29,4 +29,11 @@ class Database extends Config {
         return $this->pdo;
     }
 
+    public function query($statement){
+        $pdo = $this->getPDO();
+        $req = $pdo->prepare($statement);
+        $req->execute();
+        return $req->fetchAll();
+    }
+
 }
