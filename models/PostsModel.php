@@ -11,4 +11,15 @@ class PostsModel extends MainModel{
         return $this->db->query($query);
     }
 
+    public function countBlogPosts(){
+        $query = 'SELECT COUNT(*) AS nb_posts FROM `post`';
+        return $this->db->query($query);
+    }
+
+    public function getLimitBlogPosts($first, $perPage)
+    {
+        $query = 'SELECT * FROM `post` ORDER BY `date_maj` DESC LIMIT '.$first.','.$perPage;
+        return $this->db->query($query);
+    }
+
 }
