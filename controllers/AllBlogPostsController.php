@@ -26,7 +26,7 @@ class AllBlogPostsController extends MainController
         $countPosts = $this->postModel->countBlogPosts();
         $countPosts = intval($countPosts[0]['nb_posts']);
         // On détermine le nombre d'articles par page
-        $perPage = 5;
+        $perPage = 6;
         // On calcule le nombre de pages total
         $pages = ceil($countPosts / $perPage);
         $firstPost = ($currentPage * $perPage) - $perPage;

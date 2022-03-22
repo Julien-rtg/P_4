@@ -1,12 +1,20 @@
 <div class="container d-flex flex-column align-items-center">
 
-    {% for post in posts %}
-        {{ post.titre }}
-        {{ post.chapo }}
-        <img src="./ressources/img/{{post.image}}">
-        {{ post.contenu }}
-        {{ post.date_maj|date("d/m/Y") }}
-    {% endfor %}
+    <div class="row d-flex justify-content-center">
+        {% for post in posts %}
+        <div class="card m-5 col-5 p-0" >
+            <img class="card-img-top" src="./ressources/img/{{post.image}}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{ post.titre }}</h5>
+                <p class="card-text">{{ post.chapo }}</p>
+                <p class="card-text">{{ post.contenu }}</p>
+                <footer class="blockquote-footer">{{ post.date_maj|date("d/m/Y") }}</footer>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+        
+
 
     <nav>
         <ul class="pagination">
