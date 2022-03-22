@@ -1,12 +1,31 @@
 <div class="container d-flex flex-column align-items-center">
 
-{% for post in posts %}
+    {% for post in posts %}
+        {{ post.titre }}
+        {{ post.chapo }}
+        <img src="./ressources/img/{{post.image}}">
+        {{ post.contenu }}
+        {{ post.date_maj|date("d/m/Y") }}
+    {% endfor %}
 
-    {{ post.titre }}
-    {{ post.chapo }}
-    <img src="./ressources/img/{{post.image}}">
-    {{ post.contenu }}
-    {{ post.date_maj }}
+    <nav>
+        <ul class="pagination">
+            <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
+            <li class="page-item {{currentPage == 1 ? ' disabled' : ''}} ">
+                <a href="./posts?page{{currentPage - 1}}" class="page-link">Précédente</a>
+            </li>
 
-{% endfor %}
+            {% for page in pages %}
+                <!-- Lien vers chacune des pages (activé si on se trouve sur la page correspondante) -->
+                <li class="page-item {{currentPage == page ? " active" : "" }}">
+                    <a href="./posts?page={{page}}" class="page-link">{{page}}</a>
+                </li>
+            {% endfor %}
+                <!-- Lien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
+                <li class="page-item {{currentPage == pages ? " disabled" : "" }}">
+                <a href="./posts?page={{currentPage + 1}}" class="page-link">Suivante</a>
+            </li>
+        </ul>
+    </nav>
+
 </div>
