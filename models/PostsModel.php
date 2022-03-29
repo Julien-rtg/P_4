@@ -22,4 +22,10 @@ class PostsModel extends MainModel{
         return $this->db->query($query);
     }
 
+    public function getPost($id){
+        $query = 'select * from post';
+        $query .= ' where id = '.$id;
+        return $this->db->query($query);
+    }
+
 }

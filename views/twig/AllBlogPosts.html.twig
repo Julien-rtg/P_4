@@ -4,10 +4,11 @@
         {% for post in posts %}
         <div class="card m-5 col-5 p-0" >
             <img class="card-img-top" src="./ressources/img/{{post.image}}" alt="Card image cap">
-            <div class="card-body">
+            <div class="card-body d-flex flex-column">
                 <h5 class="card-title">{{ post.titre }}</h5>
                 <p class="card-text">{{ post.chapo }}</p>
                 <p class="card-text">{{ post.contenu }}</p>
+                <a href="./post?id={{post.id}}" class="btn btn-primary d-flex align-self-end">Détails du post</a>
                 <footer class="blockquote-footer">{{ post.date_maj|date("d/m/Y") }}</footer>
             </div>
         </div>
