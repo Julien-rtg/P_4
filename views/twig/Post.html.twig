@@ -1,4 +1,4 @@
-<div class="container d-flex flex-column align-items-center bg-light pb-5 mt-5">
+<div class="container d-flex flex-column align-items-center bg-light pb-5">
 
     <h2 class="mt-5">{{ post.titre }}</h2>
     <hr class="hrPost">
@@ -8,5 +8,12 @@
     <p class="">{{ post.date_maj|date("d/m/Y") }}</p>
     
     <a href="" class="d-flex align-self-end me-5">Modifier l'article</a>
+
+    <hr class="hrPost">
+    <h1 class="mb-4">Commentaires :</h1>
+
+    <div class="form-group">
+        <textarea class="form-control" cols="130" rows="5" placeholder="Votre commentaire"></textarea>
+    </div>
 
 </div>
