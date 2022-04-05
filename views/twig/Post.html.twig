@@ -1,19 +1,38 @@
-<div class="container d-flex flex-column align-items-center bg-light pb-5">
+<div class="container-fluid d-flex flex-column align-items-center bg-light pb-5">
 
-    <h2 class="mt-5">{{ post.titre }}</h2>
-    <hr class="hrPost">
-    <h5 class="mb-3">{{ post.chapo }}</h5>
-    <img class="" src="./ressources/img/{{post.image}}" alt="">
-    <p class="mt-3">{{ post.contenu }}</p>
-    <p class="">{{ post.date_maj|date("d/m/Y") }}</p>
+    <div class="blocPost d-flex">
+        <div class="leftBlocPost d-flex flex-column align-items-center bgLightDark pb-5">
+            <h2 class="mt-5">{{ post.titre }}</h2>
+            <h5 class="mb-3">{{ post.chapo }}</h5>
+            <hr class="hrPost">
+            <div class="blocImg d-flex align-items-center justify-content-center mt-4">
+                <img class="imgPost" src="./ressources/img/{{post.image}}" alt="">
+            </div>
+        </div>
+        <div class="rightBlocPost mt-5 d-flex flex-column align-items-center justify-content-between">
+            <div class="descriptionPost  d-flex flex-column align-items-center">
+                <h3>Description : </h3>
+                <p class="mt-3">{{ post.contenu }}</p>
+            </div>
+            <div class="botPost d-flex flex-row justify-content-between">
+                <p class="ms-5"></p>
+                <p class="datePost m-0">{{ post.date_maj|date("d/m/Y") }}</p>
+                <a href="" class="me-4">Administrer</a>
+            </div>
+        </div>
+    </div>
     
-    <a href="" class="d-flex align-self-end me-5">Modifier l'article</a>
 
-    <hr class="hrPost">
-    <h1 class="mb-4">Commentaires :</h1>
+    <div class="bottomBlocPost pb-5">
+        <div class="blocCommentaires d-flex flex-column  align-items-center">
 
-    <div class="form-group">
-        <textarea class="form-control" cols="130" rows="5" placeholder="Votre commentaire"></textarea>
+            
+            <h1 class="mb-4 mt-5 text-white">Commentaires :</h1>
+
+            <div class="form-group">
+                <textarea class="form-control" cols="130" rows="5" placeholder="Votre commentaire"></textarea>
+            </div>
+        </div>
     </div>
 
 </div>
