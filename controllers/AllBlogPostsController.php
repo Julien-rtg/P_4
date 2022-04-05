@@ -29,6 +29,7 @@ class AllBlogPostsController extends MainController
         $perPage = 6;
         // On calcule le nombre de pages total
         $pages = ceil($countPosts / $perPage);
+        $pages = intval($pages);
         $firstPost = ($currentPage * $perPage) - $perPage;
         $posts = $this->postModel->getLimitBlogPosts($firstPost, $perPage);
 

@@ -10,6 +10,39 @@
     display: flex;
     align-self: center;
 }
-.hrPost{
-    width: 90%;
+.bgLightDark{
+    background-color: rgb(245, 245, 245);
 }
+.container-fluid{
+    padding-bottom: 0%!important;
+}
+/* POST */
+    .hrPost{
+        width: 90%;
+    }
+    .blocImg{
+        width: 400px;
+        height: 400px;
+    }
+    .imgPost{
+        width: 100%;
+        border-radius: 2%;
+    }
+    .blocPost{
+        width: 99vw;
+    }
+    .leftBlocPost, .rightBlocPost{
+        width: 50%;
+        border-radius: 1%;
+    }
+    .descriptionPost{
+        width: 80%;
+    }
+    .bottomBlocPost{
+        background-color: rgba(var(--bs-primary-rgb),var(--bs-bg-opacity))!important;
+        width: 99vw;
+    }
+    .botPost{
+        width: 100%;
+    }
+/* POST */
