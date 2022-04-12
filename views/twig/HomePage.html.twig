@@ -17,68 +17,73 @@
         </div>
     {% endif %}
     
+    <div class="containerForm">
     
-    <form action="" method="POST" novalidate>
-        <div class="row mt-5">
-            <div class="col">
-                {% if form['form']['first_name'] %} {# Si il y a une erreur dans le formulaire on reinsère la valeur dans l'input #}
-                    <input type="text" name="first_name" id="first_name" class="form-control" placeholder="Votre nom..." value="{{form['form']['first_name']}}">
-                {% else %}
-                    <input type="text" name="first_name" id="first_name" class="form-control" placeholder="Votre nom...">
-                {% endif %}
-                {% if form['errors']['first_name'] %}
-                    <span class="badge bg-danger">{{form['errors']['first_name']}}</span>
-                {% endif %}
+        <form class="formAccueil container" action="" method="POST" novalidate>
+            <div class="row mt-5">
+                <div class="col">
+                    {% if form['form']['first_name'] %} {# Si il y a une erreur dans le formulaire on reinsère la valeur dans l'input #}
+                        <input type="text" name="first_name" id="first_name" class="form-control" placeholder="Votre nom..." value="{{form['form']['first_name']}}">
+                    {% else %}
+                        <input type="text" name="first_name" id="first_name" class="form-control" placeholder="Votre nom...">
+                    {% endif %}
+                    {% if form['errors']['first_name'] %}
+                        <span class="badge bg-danger">{{form['errors']['first_name']}}</span>
+                    {% endif %}
+                </div>
+                <div class="col">
+                    {% if form['form']['last_name'] %}
+                        <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Votre prénom..." value="{{form['form']['last_name']}}">
+                    {% else %}
+                        <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Votre prénom...">
+                    {% endif %}
+                    {% if form['errors']['last_name'] %}
+                        <span class="badge bg-danger">{{form['errors']['last_name']}}</span>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {% if form['form']['email'] %}
+                        <input type="email" name="email" id="email" class="form-control mt-3" placeholder="Votre email..." value="{{form['form']['email']}}">
+                    {% else %}
+                        <input type="email" name="email" id="email" class="form-control mt-3" placeholder="Votre email...">
+                    {% endif %}
+                    {% if form['errors']['email'] %}
+                        <span class="badge bg-danger">{{form['errors']['email']}}</span>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {% if form['form']['object'] %}
+                        <input type="text" name="object" id="object" class="form-control mt-3" placeholder="Objet du message" value="{{form['form']['object']}}">
+                    {% else %}
+                        <input type="text" name="object" id="object" class="form-control mt-3" placeholder="Objet du message">
+                    {% endif %}
+                    {% if form['errors']['object'] %}
+                        <span class="badge bg-danger">{{form['errors']['object']}}</span>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {% if form['form']['message'] %}
+                        <textarea class="form-control mt-3" name="message" id="message" rows="3" placeholder="Message...">{{form['form']['message']}}</textarea>
+                    {% else %}
+                        <textarea class="form-control mt-3" name="message" id="message" rows="3" placeholder="Message..."></textarea>
+                    {% endif %}
+                    {% if form['errors']['message'] %}
+                        <span class="badge bg-danger">{{form['errors']['message']}}</span>
+                    {% endif %}
+                </div>
+                <div class="form-group mt-2">
+                    <button class="btn btn-primary" type="submit">Envoyer</button>
+                </div>
             </div>
-            <div class="col">
-                {% if form['form']['last_name'] %}
-                    <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Votre prénom..." value="{{form['form']['last_name']}}">
-                {% else %}
-                    <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Votre prénom...">
-                {% endif %}
-                {% if form['errors']['last_name'] %}
-                    <span class="badge bg-danger">{{form['errors']['last_name']}}</span>
-                {% endif %}
-            </div>
-            <div class="form-group">
-                {% if form['form']['email'] %}
-                    <input type="email" name="email" id="email" class="form-control mt-3" placeholder="Votre email..." value="{{form['form']['email']}}">
-                {% else %}
-                    <input type="email" name="email" id="email" class="form-control mt-3" placeholder="Votre email...">
-                {% endif %}
-                {% if form['errors']['email'] %}
-                    <span class="badge bg-danger">{{form['errors']['email']}}</span>
-                {% endif %}
-            </div>
-            <div class="form-group">
-                {% if form['form']['object'] %}
-                    <input type="text" name="object" id="object" class="form-control mt-3" placeholder="Objet du message" value="{{form['form']['object']}}">
-                {% else %}
-                    <input type="text" name="object" id="object" class="form-control mt-3" placeholder="Objet du message">
-                {% endif %}
-                {% if form['errors']['object'] %}
-                    <span class="badge bg-danger">{{form['errors']['object']}}</span>
-                {% endif %}
-            </div>
-            <div class="form-group">
-                {% if form['form']['message'] %}
-                    <textarea class="form-control mt-3" name="message" id="message" rows="3" placeholder="Message...">{{form['form']['message']}}</textarea>
-                {% else %}
-                    <textarea class="form-control mt-3" name="message" id="message" rows="3" placeholder="Message..."></textarea>
-                {% endif %}
-                {% if form['errors']['message'] %}
-                    <span class="badge bg-danger">{{form['errors']['message']}}</span>
-                {% endif %}
-            </div>
-            <div class="form-group mt-2">
-                <button class="btn btn-primary" type="submit">Envoyer</button>
-            </div>
-        </div>
-    </form>
+        </form>
 
-    <div class="linkHomePage mt-5">
-        <a href="ressources/cv/CV_Rittling_Julien.pdf" target="_blank" class="me-5"><img src="ressources/logo/cv.png" alt="CV" title="CV"></a>
-        <a href="https://github.com/Julien-rtg" class="me-5"><img src="ressources/logo/github.png" alt="Github" title="Github"></a>
-        <a href="https://www.linkedin.com/in/julien-rittling/"><img src="ressources/logo/linkedin.png" alt="Linkedin" title="Linkedin"></a>
+    </div>
+
+    <div class="linkHomePage bg-light mt-5">
+        <div class="container link">
+            <a href="ressources/cv/CV_Rittling_Julien.pdf" target="_blank" class="me-5"><img src="ressources/logo/cv.png" alt="CV" title="CV"></a>
+            <a href="https://github.com/Julien-rtg" class="me-5"><img src="ressources/logo/github.png" alt="Github" title="Github"></a>
+            <a href="https://www.linkedin.com/in/julien-rittling/"><img src="ressources/logo/linkedin.png" alt="Linkedin" title="Linkedin"></a>
+        </div>
     </div>
 </div>

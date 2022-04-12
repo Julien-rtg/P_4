@@ -2,12 +2,13 @@
 
     <div class="row d-flex justify-content-center">
         {% for post in posts %}
-        <div class="card m-5 col-5 p-0" >
+        <div class="card m-5 col-3 p-0" >
             <img class="card-img-top" src="./ressources/img/{{post.image}}" alt="Card image cap">
             <div class="card-body d-flex flex-column">
-                <h5 class="card-title">{{ post.titre }}</h5>
-                <p class="card-text">{{ post.chapo }}</p>
-                <p class="card-text">{{ post.contenu }}</p>
+                <h5 class="card-title text-center mb-3">{{ post.titre }}</h5>
+                <p class="card-text mb-1">{{ post.chapo }}</p>
+                <hr>
+                <p class="card-text">{{ post.contenu[:200] }} ...</p>
                 <a href="./post?id={{post.id}}" class="btn btn-primary d-flex align-self-end">Détails du post</a>
                 <footer class="blockquote-footer">{{ post.date_maj|date("d/m/Y") }}</footer>
             </div>
@@ -20,18 +21,18 @@
     <nav>
         <ul class="pagination">
             <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
-            <li class="page-item {{currentPage == 1 ? ' disabled' : ''}} ">
-                <a href="./posts?page{{currentPage - 1}}" class="page-link">Précédente</a>
+            <li class="bgPagi page-item {{currentPage == 1 ? ' disabled' : ''}} ">
+                <a href="./posts?page{{currentPage - 1}}" class="page-link bgPagi">Précédente</a>
             </li>
             {% for page in 1 .. pages %}
                 <!-- Lien vers chacune des pages (activé si on se trouve sur la page correspondante) -->
-                <li class="page-item {{currentPage == page ? " active" : "" }}">
-                    <a href="./posts?page={{page}}" class="page-link">{{page}}</a>
+                <li class=" bgPagi page-item {{currentPage == page ? " active" : "" }}">
+                    <a href="./posts?page={{page}}" class="bgPagi page-link">{{page}}</a>
                 </li>
             {% endfor %}
             <!-- Lien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
-            <li class="page-item {{currentPage == pages ? " disabled" : "" }}">
-                <a href="./posts?page={{currentPage + 1}}" class="page-link">Suivante</a>
+            <li class="bgPagi page-item {{currentPage == pages ? " disabled" : "" }}">
+                <a href="./posts?page={{currentPage + 1}}" class="page-link bgPagi">Suivante</a>
             </li>
         </ul>
     </nav>
