@@ -1,5 +1,13 @@
 <div class="container-fluid d-flex flex-column align-items-center bg-light pb-5">
-
+    {% if msg == 1 %}
+        <div class="alert alert-success mt-3 mb-3" role="alert">
+            Commentaire ajouté !
+        </div>
+    {% elseif msg %}
+        <div class="alert alert-danger mt-3 mb-3" role="alert">
+            Erreur lors de l'ajout du commentaire
+        </div>
+    {% endif %}
     <div class="blocPost d-flex">
         <div class="leftBlocPost d-flex flex-column align-items-center bgLightDark pb-5">
             <h2 class="mt-5">{{ post.titre }}</h2>
@@ -17,7 +25,7 @@
             <div class="botPost d-flex flex-row justify-content-between">
                 <p class="ms-5"></p>
                 <p class="datePost m-0">{{ post.date_maj|date("d/m/Y") }}</p>
-                <a href="" class="me-4">Administrer</a>
+                <a href="" class="me-4 text-primary">Administrer</a>
             </div>
         </div>
     </div>
@@ -29,9 +37,22 @@
             
             <h1 class="mb-4 mt-5 text-white">Commentaires :</h1>
 
-            <div class="form-group">
-                <textarea class="form-control" cols="130" rows="5" placeholder="Votre commentaire"></textarea>
+            <div class="addCommentaire">
+
+                <form action="" method="post">
+                    {% if comment == 'error' %}
+                        <span class="badge bg-danger">Veuillez renseiger un commentaire</span>
+                    {% endif %}
+                    <div class="form-group">
+                        <textarea name="commentaire" class="form-control" cols="130" rows="5" placeholder="Votre commentaire"></textarea>
+                    </div>
+                    <div class="form-group mt-2">
+                        <button class="btn btn-light" type="submit">Envoyer</button>
+                    </div>
+                </form>
+                
             </div>
+
         </div>
     </div>
 
