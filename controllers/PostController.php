@@ -20,14 +20,14 @@ class PostController extends MainController
         $this->comModel = new CommentairesModel();
         $id = isset($_GET['id']) ?  $_GET['id'] : 0;
         $post = $this->postModel->getPost($id);
-
+        $dbComment = $this->comModel->getCommentaire($id);
         $comment = isset($_POST['commentaire']) ? $_POST['commentaire'] : null;
         if($comment){
             $msg = $this->addCommentaire($comment, $id);
         } else if ($comment === '') {
             $comment = 'error';
         }
-        $this->renderPost($post ?? null, $msg ?? null, $comment);
+        $this->renderPost($post ?? null, $msg ?? null, $comment, $dbComment ?? null);
     }
 
     public function addCommentaire($comment, $id){
@@ -40,13 +40,14 @@ class PostController extends MainController
     }
 
     // $this->main_view = ./views/main.html/twig and is define in MainController
-    public function renderPost($post, $msg, $comment)
+    public function renderPost($post, $msg, $comment, $dbComment)
     {
         echo $this->twig->render($this->main_view, [
             'body' => 'twig/Post.html.twig',
             'post' => $post[0],
             'msg' => $msg,
-            'comment' => $comment
+            'comment' => $comment,
+            'dbComment' => $dbComment
         ]);
     }
 }

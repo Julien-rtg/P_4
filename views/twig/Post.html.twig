@@ -1,11 +1,11 @@
 <div class="container-fluid d-flex flex-column align-items-center bg-light pb-5">
     {% if msg == 1 %}
         <div class="alert alert-success mt-3 mb-3" role="alert">
-            Commentaire ajouté !
+            Commentaire soumis pour modération !
         </div>
     {% elseif msg %}
         <div class="alert alert-danger mt-3 mb-3" role="alert">
-            Erreur lors de l'ajout du commentaire
+            Erreur lors de la soumission du commentaire
         </div>
     {% endif %}
     <div class="blocPost d-flex">
@@ -24,18 +24,18 @@
             </div>
             <div class="botPost d-flex flex-row justify-content-between">
                 <p class="ms-5"></p>
-                <p class="datePost m-0">{{ post.date_maj|date("d/m/Y") }}</p>
-                <a href="" class="me-4 text-primary">Administrer</a>
+                <p class="datePost m-0 ms-5">{{ post.date_maj|date("d/m/Y") }}</p>
+                <a href="" class="me-4 mb-2 btn btn-primary">Administrer</a>
             </div>
         </div>
     </div>
     
 
     <div class="bottomBlocPost pb-5">
-        <div class="blocCommentaires d-flex flex-column  align-items-center">
+        <div class="blocCommentaires container d-flex flex-column  align-items-center">
 
             
-            <h1 class="mb-4 mt-5 text-white">Commentaires :</h1>
+            <h2 class="mb-4 mt-5 text-white">Commentaires :</h2>
 
             <div class="addCommentaire">
 
@@ -52,7 +52,18 @@
                 </form>
                 
             </div>
-
+            <div class="displayCommentaire container d-flex flex-column align-items-center">
+                <h2 class="mb-4 mt-5 text-white">Liste des commentaires :</h2>
+                {% for com in dbComment %}
+                    <div class="bg-white com mb-3 p-2">
+                        <p class="text-center">{{com.contenu}}</p>
+                        <div class="d-flex justify-content-between">
+                            <p>{{com.date}}</p>
+                            <p>{{com.id_utilisateur}}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 

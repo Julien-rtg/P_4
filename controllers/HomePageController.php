@@ -51,7 +51,7 @@ class HomePageController extends MainController {
                             strlen($value) > 255 ? $errors[$key] = 'Votre objet est trop long' : $form[$key] = $value;
                             break;
                         case 'message':
-                            strlen($value) > 65000 ? $errors[$key] = 'Votre message est trop long' : $form[$key] = $value;
+                            strlen($value) > 15000 ? $errors[$key] = 'Votre message est trop long' : $form[$key] = $value;
                             break;
                         default:
                             break;
