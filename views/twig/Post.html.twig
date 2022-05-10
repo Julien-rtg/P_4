@@ -63,12 +63,12 @@
             <div class="displayCommentaire container d-flex flex-column align-items-center">
                 <h2 class="mb-4 mt-5 text-white">Liste des commentaires :</h2>
                 {% for com in dbComment %}
-                    <div class="bg-white com mb-3 p-2">
+                    <div class="bg-white com mb-2">
                         <p class="text-center">{{com.contenu}}</p>
-                        <div class="d-flex justify-content-between">
-                            <p>{{com.date}}</p>
-                            <p>{{com.id_utilisateur}}</p>
-                        </div>
+                    </div>
+                    <div class="creditsCom d-flex justify-content-between">
+                        <p class="text-white">{{com.date}}</p>
+                        <p class="text-white">{{com.id_utilisateur}}</p>
                     </div>
                 {% endfor %}
             </div>
