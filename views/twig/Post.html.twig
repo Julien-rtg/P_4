@@ -1,19 +1,11 @@
 <div class="container-fluid d-flex flex-column align-items-center bg-light pb-5">
     {% if msg == 1 %}
         <div class="alert alert-success mt-3 mb-3" role="alert">
-<<<<<<< HEAD
             Commentaire soumis pour modération !
         </div>
     {% elseif msg %}
         <div class="alert alert-danger mt-3 mb-3" role="alert">
             Erreur lors de la soumission du commentaire
-=======
-            Commentaire ajouté !
-        </div>
-    {% elseif msg %}
-        <div class="alert alert-danger mt-3 mb-3" role="alert">
-            Erreur lors de l'ajout du commentaire
->>>>>>> 0517a3f8dbdd3c36a8e958d2f6516f0a1be4fff5
         </div>
     {% endif %}
     <div class="blocPost d-flex">
@@ -39,7 +31,7 @@
     </div>
     
 
-    <div class="bottomBlocPost pb-5">
+    <div class="bottomBlocPost">
         <div class="blocCommentaires container d-flex flex-column  align-items-center">
 
             
@@ -54,26 +46,28 @@
                     <div class="form-group">
                         <textarea name="commentaire" class="form-control" cols="130" rows="5" placeholder="Votre commentaire"></textarea>
                     </div>
-                    <div class="form-group mt-2">
+                    <div class="form-group mt-2 mb-4">
                         <button class="btn btn-light" type="submit">Envoyer</button>
                     </div>
                 </form>
                 
             </div>
-            <div class="displayCommentaire container d-flex flex-column align-items-center">
-                <h2 class="mb-4 mt-5 text-white">Liste des commentaires :</h2>
+            
+        </div>
+        <div class="displayCommentaire bg-white container-fluid d-flex flex-column align-items-center">
+                <h2 class="mb-4 mt-5">Liste des commentaires :</h2>
                 {% for com in dbComment %}
-                    <div class="bg-white com mb-2">
+                    <div class=" com mb-2">
                         <p class="text-center">{{com.contenu}}</p>
                     </div>
                     <div class="creditsCom d-flex justify-content-between">
-                        <p class="text-white">{{com.date}}</p>
-                        <p class="text-white">{{com.id_utilisateur}}</p>
+                        <p class="">{{com.date}}</p>
+                        <p class="">{{com.id_utilisateur}}</p>
                     </div>
+                    <hr class="hrPost">
                 {% endfor %}
             </div>
 
-        </div>
     </div>
 
 </div>
