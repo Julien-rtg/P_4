@@ -6,10 +6,8 @@ use Controllers\core\MainController;
 
 class AdminController extends MainController{
 
-    public function adminPage()
-    {
+    public function adminPage(){
         
-
         $this->renderAdminPage();
     }
 
