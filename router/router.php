@@ -8,7 +8,10 @@ use Controllers\{
     Page404Controller,
     PostController
 };
-use Controllers\admin\AdminController;
+use Controllers\admin\{
+    AdminController,
+    AddPostController
+};
 
 class Router {
 
@@ -21,6 +24,7 @@ class Router {
         $this->allBlogPosts = new AllBlogPostsController();
         $this->post = new PostController();
         $this->admin = new AdminController();
+        $this->adminAdd = new AddPostController();
     }
 
     public function routeMap(){
@@ -45,6 +49,11 @@ class Router {
         // map admin accueil
         $this->router->map('GET|POST', '/p_4/admin', function () {
             $this->admin->adminPage();
+        });
+
+        // map admin add post
+        $this->router->map('GET|POST', '/p_4/add_post', function () {
+            $this->adminAdd->addPost();
         });
 
         $match = $this->router->match();
