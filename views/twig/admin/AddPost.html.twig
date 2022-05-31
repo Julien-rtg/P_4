@@ -2,17 +2,43 @@
     <h2 class="text-center mt-4 mb-4">Ajouter un post</h2>
     <form action="" method="post">
         <div class="form-group mb-3">
-            <input name="titre" class="form-control" type="text" placeholder="Titre">
+            {% if form['form']['title'] %} {# Si il y a une erreur dans le formulaire on reinsère la valeur dans l'input #}
+                <input type="text" name="title" id="title" class="form-control" placeholder="Titre" value="{{form['form']['title']}}">
+            {% else %}
+                <input type="text" name="title" id="title" class="form-control" placeholder="Titre">
+            {% endif %}
+            {% if form['errors']['title'] %}
+                <span class="badge bg-danger">{{form['errors']['title']}}</span>
+            {% endif %}
         </div>
+
         <div class="form-group mb-3">
             <input name="image" class="form-control" type="file" placeholder="Image">
+            {% if form['errors']['image'] %}
+                <span class="badge bg-danger">{{form['errors']['image']}}</span>
+            {% endif %}
         </div>
         <div class="form-group mb-3">
-            <textarea name="chapo" class="form-control" cols="130" rows="2" placeholder="Chapo"></textarea>
+            {% if form['form']['chapo'] %} {# Si il y a une erreur dans le formulaire on reinsère la valeur dans l'input #}
+                <textarea name="chapo" class="form-control" cols="130" rows="2" placeholder="Chapo">{{form['form']['chapo']}}</textarea>
+            {% else %}
+                <textarea name="chapo" class="form-control" cols="130" rows="2" placeholder="Chapo"></textarea>
+            {% endif %}
+            {% if form['errors']['chapo'] %}
+                <span class="badge bg-danger">{{form['errors']['chapo']}}</span>
+            {% endif %}
         </div>
         <div class="form-group mb-3">
-            <textarea name="commentaire" class="form-control" cols="130" rows="5" placeholder="Contenu"></textarea>
+            {% if form['form']['comment'] %} {# Si il y a une erreur dans le formulaire on reinsère la valeur dans l'input #}
+                <textarea name="comment" class="form-control" cols="130" rows="5" placeholder="Contenu">{{form['form']['comment']}}</textarea>
+            {% else %}
+                <textarea name="comment" class="form-control" cols="130" rows="5" placeholder="Contenu">{{form['form']['comment']}}</textarea>
+            {% endif %}
+            {% if form['errors']['comment'] %}
+                <span class="badge bg-danger">{{form['errors']['comment']}}</span>
+            {% endif %}
         </div>
+
         <div class="form-group mt-2 mb-4">
             <button class="btn btn-primary" type="submit">Ajouter</button>
         </div>

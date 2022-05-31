@@ -11,17 +11,18 @@ class AddPostController extends MainController{
         if (!empty($_POST)) {
             $form = $this->checkDataPostForm($_POST);
             if (!$form['errors']) {
-
+                // ADD POST
             }
         }
-        $this->renderAddPage();
+        $this->renderAddPage($form ?? null);
     }
 
     // $this->main_view = ./views/main.html/twig and is define in MainController
-    public function renderAddPage()
+    public function renderAddPage($form)
     {
         echo $this->twig->render($this->main_view, [
             'body' => 'twig/admin/AddPost.html.twig',
+            'form' => $form,
         ]);
     }
 
@@ -34,37 +35,34 @@ class AddPostController extends MainController{
             $value = htmlspecialchars($value);
             if ($value) { // SI VALEUR
                 switch ($key) { // ON FAIT UN SWITCH POUR LES MSGS D'ERREURS
-                    case 'first_name':
-                        strlen($value) > 30 ? $errors[$key] = 'Votre nom est trop long' : $form[$key] = $value;
+                    case 'title':
+                        strlen($value) > 30 ? $errors[$key] = 'Votre titre est trop long' : $form[$key] = $value;
                         break;
-                    case 'last_name':
-                        strlen($value) > 30 ? $errors[$key] = 'Votre prénom est trop long' : $form[$key] = $value;
+                    case 'chapo':
+                        strlen($value) > 30 ? $errors[$key] = 'Votre chapo est trop long' : $form[$key] = $value;
                         break;
-                    case 'object':
-                        strlen($value) > 255 ? $errors[$key] = 'Votre objet est trop long' : $form[$key] = $value;
+                    case 'comment':
+                        strlen($value) > 255 ? $errors[$key] = 'Votre commentaire est trop long' : $form[$key] = $value;
                         break;
-                    case 'message':
-                        strlen($value) > 15000 ? $errors[$key] = 'Votre message est trop long' : $form[$key] = $value;
+                    case 'image':
+                        
                         break;
                     default:
                         break;
                 }
             } else { // SI PAS DE VALEURS
                 switch ($key) { // ON FAIT UN SWITCH POUR LES MSGS D'ERREURS
-                    case 'first_name':
-                        $errors[$key] = 'Veuillez renseigner votre nom';
+                    case 'title':
+                        $errors[$key] = 'Veuillez renseigner votre titre';
                         break;
-                    case 'last_name':
-                        $errors[$key] = 'Veuillez renseigner votre prénom';
+                    case 'chapo':
+                        $errors[$key] = 'Veuillez renseigner votre chapo';
                         break;
-                    case 'email':
-                        $errors[$key] = 'Veuillez renseigner votre email';
+                    case 'comment':
+                        $errors[$key] = 'Veuillez renseigner votre commentaire';
                         break;
-                    case 'object':
-                        $errors[$key] = 'Veuillez renseigner l\'objet du message';
-                        break;
-                    case 'message':
-                        $errors[$key] = 'Veuillez renseigner le message';
+                    case 'image':
+                        $errors[$key] = 'Veuillez renseigner votre image';
                         break;
                     default:
                         break;
