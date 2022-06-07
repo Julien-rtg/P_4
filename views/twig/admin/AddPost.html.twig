@@ -1,6 +1,6 @@
 <div class="container">
     <h2 class="text-center mt-4 mb-4">Ajouter un post</h2>
-    <form action="" method="post">
+    <form enctype="multipart/form-data" action="" method="post">
         <div class="form-group mb-3">
             {% if form['form']['title'] %} {# Si il y a une erreur dans le formulaire on reinsère la valeur dans l'input #}
                 <input type="text" name="title" id="title" class="form-control" placeholder="Titre" value="{{form['form']['title']}}">
@@ -13,9 +13,9 @@
         </div>
 
         <div class="form-group mb-3">
-            <input name="image" class="form-control" type="file" placeholder="Image">
-            {% if form['errors']['image'] %}
-                <span class="badge bg-danger">{{form['errors']['image']}}</span>
+            <input name="image" id="image" class="form-control" type="file" placeholder="Image">
+            {% if error_image %}
+                <span class="badge bg-danger">{{error_image}}</span>
             {% endif %}
         </div>
         <div class="form-group mb-3">
