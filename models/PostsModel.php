@@ -28,12 +28,13 @@ class PostsModel extends MainModel{
         return $this->db->query($query);
     }
 
-    // public function addPost($post){
-    //     $query = 'insert into post';
-    //     $query .= ' (`id_post`, `id_utilisateur`, `contenu`, `date`, `valider`)';
-    //     $query .= ' VALUES (' . $id_post . ', 1, "' . $comment . '", "' . $date . '", 0)';
-    //     // var_dump($query);
-    //     return $this->db->insert($query);
-    // }
+    public function addPost($post, $path){
+        // var_dump($post);
+        $query = 'insert into post';
+        $query .= ' (`titre`, `image`, `chapo`, `contenu`, `id_utilisateur`)';
+        $query .= ' VALUES ("'.$post['title'].'", "'.$path .'", "' . $post['chapo'] . '", "' . $post['comment'] . '", "1")';
+        // var_dump($query);
+        return $this->db->insert($query);
+    }
 
 }

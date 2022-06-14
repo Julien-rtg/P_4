@@ -8,7 +8,11 @@
                 <h5 class="card-title text-center mb-3">{{ post.titre }}</h5>
                 <p class="card-text mb-1">{{ post.chapo }}</p>
                 <hr>
-                <p class="card-text">{{ post.contenu[:200] }} ...</p>
+                <p class="card-text card-content">{{ post.contenu[:200] }} 
+                {% if post.contenu|length > 200 %}
+                    ...
+                {% endif %}
+                </p>
                 <a href="./post?id={{post.id}}" class="btn btn-primary d-flex align-self-end">Détails du post</a>
                 <footer class="blockquote-footer">{{ post.date_maj|date("d/m/Y") }}</footer>
             </div>

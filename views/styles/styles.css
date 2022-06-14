@@ -19,6 +19,9 @@
 .container-fluid{
     padding-bottom: 0%!important;
 }
+.width100{
+    width: 100%;
+}
 /* HOME */
     .linkHomePage{
         position: fixed;
@@ -76,6 +79,12 @@
     }
     .creditsCom{
         width: 100%;
+    }
+    .card-img-top{
+        height: 300px;
+    }
+    .card-content{
+        height: 140px;
     }
 
 /* POST */

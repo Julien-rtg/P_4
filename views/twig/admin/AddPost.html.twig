@@ -1,5 +1,14 @@
 <div class="container">
     <h2 class="text-center mt-4 mb-4">Ajouter un post</h2>
+    {% if retourAdd == true %}
+        <div class="alert alert-success" role="alert">
+            Article ajouté !
+        </div>
+    {% else %}
+        <div class="alert alert-danger" role="alert">
+            Erreur lors de l'ajout de l'article
+        </div>
+    {% endif %}
     <form enctype="multipart/form-data" action="" method="post">
         <div class="form-group mb-3">
             {% if form['form']['title'] %} {# Si il y a une erreur dans le formulaire on reinsère la valeur dans l'input #}
