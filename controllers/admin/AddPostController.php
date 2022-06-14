@@ -17,19 +17,20 @@ class AddPostController extends MainController{
             $error_image = !is_string($image) ? null : $image;
             if (!$form['errors'] && !is_string($image)) {
                 $path_image = $this->uploadImage($image);
-                // $res = $this->postModel->addPost($form, $path_image);
+                $res = $this->postModel->addPost($form['form'], $path_image);
             }
         }
-        $this->renderAddPage($form ?? null, $error_image ?? null);
+        $this->renderAddPage($form ?? null, $error_image ?? null, $res ?? null);
     }
 
     // $this->main_view = ./views/main.html/twig and is define in MainController
-    public function renderAddPage($form, $error_image)
+    public function renderAddPage($form, $error_image, $retourAdd)
     {
         echo $this->twig->render($this->main_view, [
             'body' => 'twig/admin/AddPost.html.twig',
             'form' => $form,
-            'error_image' => $error_image
+            'error_image' => $error_image,
+            'retourAdd' => $retourAdd
         ]);
     }
 
@@ -96,7 +97,7 @@ class AddPostController extends MainController{
         // var_dump($file_name);
         // var_dump($image);
         if (move_uploaded_file($image['tmp_name'], $uploadFile)) {
-            return $image['name'];
+            return $newFileName;
         }
     }
 

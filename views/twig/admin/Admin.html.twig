@@ -2,23 +2,23 @@
 
     <a class="btn btn-success mb-4 mt-4" href="/p_4/add_post">Ajouter un post</a>
     {% for post in posts %}
-        <div class="row d-flex justify-content-center mb-4 mt-4">
-            <div class="col">
+        <div class="row d-flex justify-content-center mb-4 mt-4 width100">
+            <div class="col-2">
                 {{ post.titre }}
             </div>
-            <div class="col">
+            <div class="col-2">
                 {{ post.chapo }}
             </div>
-            <div class="col">
+            <div class="col-2">
                 {{ post.contenu[:50] }}
             </div>
-            <div class="col">
+            <div class="col-2">
                 {{ post.date_maj|date("d/m/Y") }}
             </div>
-            <div class="col">
+            <div class="col-2">
                 <button class="btn btn-primary">Modifier le post</button>
             </div>
-            <div class="col">
+            <div class="col-2">
                 <button class="btn btn-danger">Supprimer le post</button>
             </div>
         </div>
