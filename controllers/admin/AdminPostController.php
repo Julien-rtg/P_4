@@ -6,11 +6,17 @@ use Controllers\core\MainController;
 
 use Models\PostsModel;
 
-class AddPostController extends MainController{
+class AdminPostController extends MainController{
 
-    public function addPost()
+    public function addPost($post=null)
     {
         $this->postModel = new PostsModel();
+        if($post){
+            $form['form']['title'] = $post[0]['titre'];
+            $form['form']['chapo'] = $post[0]['chapo'];
+            $form['form']['comment'] = $post[0]['contenu'];
+            $modify = true;
+        }
         if (!empty($_POST)) {
             $form = $this->checkDataPostForm($_POST);
             $image = $this->checkImage($_FILES);
@@ -20,17 +26,26 @@ class AddPostController extends MainController{
                 $res = $this->postModel->addPost($form['form'], $path_image);
             }
         }
-        $this->renderAddPage($form ?? null, $error_image ?? null, $res ?? null);
+        $this->renderAddPage($form ?? null, $error_image ?? null, $res ?? null, $modify ?? null);
+    }
+
+    public function modifyPost($id)
+    {
+        $this->postModel = new PostsModel();
+        $post = $this->postModel->getPost($id);
+        // var_dump($post);
+        $this->addPost($post);
     }
 
     // $this->main_view = ./views/main.html/twig and is define in MainController
-    public function renderAddPage($form, $error_image, $retourAdd)
+    public function renderAddPage($form, $error_image, $retourAdd, $mod)
     {
         echo $this->twig->render($this->main_view, [
             'body' => 'twig/admin/AddPost.html.twig',
             'form' => $form,
             'error_image' => $error_image,
-            'retourAdd' => $retourAdd
+            'retourAdd' => $retourAdd,
+            'mod' => $mod
         ]);
     }
 
