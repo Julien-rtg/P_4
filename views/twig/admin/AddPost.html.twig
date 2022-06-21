@@ -1,5 +1,9 @@
 <div class="container">
-    <h2 class="text-center mt-4 mb-4">Ajouter un post</h2>
+    {% if mod %}
+        <h2 class="text-center mt-4 mb-4">Modifier un post</h2>
+    {% else %}
+        <h2 class="text-center mt-4 mb-4">Ajouter un post</h2>
+    {% endif %}
     {% if retourAdd == true %}
         <div class="alert alert-success" role="alert">
             Article ajouté !
@@ -49,7 +53,11 @@
         </div>
 
         <div class="form-group mt-2 mb-4">
-            <button class="btn btn-primary" type="submit">Ajouter</button>
+            {% if mod %}
+                <button class="btn btn-primary" type="submit">Modifier</button>
+            {% else %}
+                <button class="btn btn-primary" type="submit">Ajouter</button>
+            {% endif %}
         </div>
     </form>
 </div>
