@@ -10,6 +10,7 @@ class MailController {
         $message .= 'Prénom : ' . $datas['last_name'] . "\r\n";
         $message .= 'Message : ' . $datas['message'];
         $mail = mail($to, $subject, $message);
+        // var_dump($mail);
         if($mail){
             return 'success';
         } else {

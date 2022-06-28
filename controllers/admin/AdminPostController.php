@@ -15,18 +15,24 @@ class AdminPostController extends MainController{
             $form['form']['title'] = $post[0]['titre'];
             $form['form']['chapo'] = $post[0]['chapo'];
             $form['form']['comment'] = $post[0]['contenu'];
+
             $modify = true;
         }
         if (!empty($_POST)) {
             $form = $this->checkDataPostForm($_POST);
+            if($modify) $form['form']['id'] = $post[0]['id'];
             $image = $this->checkImage($_FILES);
             $error_image = !is_string($image) ? null : $image;
             if (!$form['errors'] && !is_string($image)) {
                 $path_image = $this->uploadImage($image);
-                $res = $this->postModel->addPost($form['form'], $path_image);
+                if($modify){
+                    $resMod = $this->postModel->modifyPost($form['form'], $path_image);
+                }else {
+                    $res = $this->postModel->addPost($form['form'], $path_image);
+                }
             }
         }
-        $this->renderAddPage($form ?? null, $error_image ?? null, $res ?? null, $modify ?? null);
+        $this->renderAddPage($form ?? null, $error_image ?? null, $res ?? null, $modify ?? null, $resMod ?? null);
     }
 
     public function modifyPost($id)
@@ -38,19 +44,21 @@ class AdminPostController extends MainController{
     }
 
     // $this->main_view = ./views/main.html/twig and is define in MainController
-    public function renderAddPage($form, $error_image, $retourAdd, $mod)
+    public function renderAddPage($form, $error_image, $retourAdd, $mod, $retourMod)
     {
         echo $this->twig->render($this->main_view, [
             'body' => 'twig/admin/AddPost.html.twig',
             'form' => $form,
             'error_image' => $error_image,
             'retourAdd' => $retourAdd,
-            'mod' => $mod
+            'mod' => $mod,
+            'retourMod' => $retourMod
         ]);
     }
 
     private function checkDataPostForm($formData)
     {
+        // var_dump($formData);
         $errors = [];
         $result = [];
         $form = [];
