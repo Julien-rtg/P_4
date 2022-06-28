@@ -37,4 +37,13 @@ class PostsModel extends MainModel{
         return $this->db->insert($query);
     }
 
+    public function modifyPost($post, $path){
+        // var_dump($post);
+        $query = 'update post';
+        $query .= ' set `titre` = "' . $post['title'] . '", `image` = "' . $path . '", `chapo` = "' . $post['chapo'] . '", `contenu` = "' . $post['comment'] . '"';
+        $query .= ' where id = ' . $post['id'];
+        // var_dump($query);
+        return $this->db->insert($query);
+    }
+
 }

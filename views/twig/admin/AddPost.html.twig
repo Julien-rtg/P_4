@@ -8,6 +8,10 @@
         <div class="alert alert-success" role="alert">
             Article ajouté !
         </div>
+    {% elseif retourMod == true %}
+        <div class="alert alert-success" role="alert">
+            Article modifié !
+        </div>
     {% elseif retourAdd != null and retourAdd != true %}
         <div class="alert alert-danger" role="alert">
             Erreur lors de l'ajout de l'article
