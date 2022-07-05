@@ -16,6 +16,7 @@ use Controllers\admin\{
 class Router {
 
     private $router;
+    private $id_deletion_post;
 
     public function __construct(){
         $this->router = new AltoRouter();
@@ -61,6 +62,15 @@ class Router {
             $this->adminAdd->modifyPost($id);
         });
 
+        // map admin delete post
+        $this->router->map('GET|POST', '/p_4/delete_post/[i:id]', function ($id) {
+            $this->id_deletion_post = $id; // je sauvegarde l'id du post dans une variable en attendant la confirmation de la suppression au niveau du modal
+        });
+        // map admin delete post
+        $this->router->map('GET|POST', '/p_4/confirm_delete_post/[i:id]', function ($id) {
+            $this->admin->deletePost($this->id_deletion_post);
+        });
+        
         $match = $this->router->match();
         $this->checkMatch($match);
     }
