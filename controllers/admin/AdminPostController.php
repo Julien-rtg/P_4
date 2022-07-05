@@ -15,6 +15,7 @@ class AdminPostController extends MainController{
             $form['form']['title'] = $post[0]['titre'];
             $form['form']['chapo'] = $post[0]['chapo'];
             $form['form']['comment'] = $post[0]['contenu'];
+            $form['form']['image'] = $post[0]['image'];
 
             $modify = true;
         }

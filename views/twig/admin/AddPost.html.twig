@@ -31,6 +31,10 @@
 
         <div class="form-group mb-3">
             <input name="image" id="image" class="form-control" type="file" placeholder="Image">
+            {% if form['form']['image'] %}
+                <img class="blocImg mt-4" src="/p_4/ressources/img/{{form['form']['image']}}">
+            {% endif %}
+            <p>Image en base de donnée</p>
             {% if error_image %}
                 <span class="badge bg-danger">{{error_image}}</span>
             {% endif %}
