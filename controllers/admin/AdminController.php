@@ -8,9 +8,13 @@ use Models\PostsModel;
 
 class AdminController extends MainController{
 
-    public function adminPage(){
+    public function adminPage($id=null){
         $this->postModel = new PostsModel();
         // $posts = $this->postModel->getAllBlogPosts();
+        if($id){
+            $del = $this->postModel->deletePost($id);
+        }
+        
 
         if (isset($_GET['page']) && !empty($_GET['page'])) { // ON RECUP LA PAGE
             $currentPage = (int) strip_tags($_GET['page']);
@@ -28,18 +32,25 @@ class AdminController extends MainController{
         $firstPost = ($currentPage * $perPage) - $perPage;
         $posts = $this->postModel->getLimitBlogPosts($firstPost, $perPage);
 
-        $this->renderAdminPage($posts ?? null, $currentPage ?? null, $pages ?? null);
+        $this->renderAdminPage($posts ?? null, $currentPage ?? null, $pages ?? null, $del ?? null);
     }
 
     // $this->main_view = ./views/main.html/twig and is define in MainController
-    public function renderAdminPage($posts, $currentPage, $pages)
+    public function renderAdminPage($posts, $currentPage, $pages, $del)
     {
+        // var_dump($del);
         echo $this->twig->render($this->main_view, [
             'body' => 'twig/admin/Admin.html.twig',
             'posts' => $posts,
             'currentPage' => $currentPage,
-            'pages' => $pages
+            'pages' => $pages,
+            'retourDel' => $del
         ]);
+    }
+
+    public function deletePost($id){
+        // header('Location: /p_4/admin');
+        $this->adminPage($id);
     }
 
 }

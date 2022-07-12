@@ -46,4 +46,16 @@ class PostsModel extends MainModel{
         return $this->db->insert($query);
     }
 
+    public function deletePost($id){
+        $query = 'delete from post';
+        $query .= ' where id = ' . $id;
+        // var_dump($query);
+        if($this->db->insert($query)){
+            return true;
+        }else {
+            return false;
+        }
+
+    }
+
 }

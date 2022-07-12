@@ -1,4 +1,14 @@
 <div class="container d-flex flex-column align-items-center">
+    {# {{retourDel}} #}
+    {% if retourDel == true %}
+        <div class="alert alert-success" role="alert">
+            Article supprimé !
+        </div>
+    {% elseif retourDel != null and retourDel == false %}
+        <div class="alert alert-danger" role="alert">
+            Erreur lors de la suppression de l'article !
+        </div>
+    {% endif %}
 
     <a class="btn btn-success mb-4 mt-4" href="/p_4/add_post">Ajouter un post</a>
     {% for post in posts %}
@@ -19,7 +29,21 @@
                 <a class="btn btn-primary" href="/p_4/modify_post/{{post.id}}">Modifier le post</a>
             </div>
             <div class="col-2">
-                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delModal" href="/p_4/delete_post/{{post.id}}">Supprimer le post</button>
+                <button  class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delModal{{post.id}}">Supprimer le post</button>
+            </div>
+            <div class="modal fade" id="delModal{{post.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Êtes vous sur de vouloir supprimer cet article ?</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                            <a href="/p_4/delete_post/{{post.id}}" type="button" class="btn btn-danger">Supprimer</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <hr class="hrPost">
@@ -48,17 +72,3 @@
 
 </div>
 
-<div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Êtes vous sur de vouloir supprimer cet article ?</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                <button type="button" class="btn btn-danger">Supprimer</button>
-            </div>
-        </div>
-    </div>
-</div>

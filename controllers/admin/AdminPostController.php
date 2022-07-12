@@ -21,12 +21,12 @@ class AdminPostController extends MainController{
         }
         if (!empty($_POST)) {
             $form = $this->checkDataPostForm($_POST);
-            if($modify) $form['form']['id'] = $post[0]['id'];
+            if(isset($modify)) $form['form']['id'] = $post[0]['id'];
             $image = $this->checkImage($_FILES);
             $error_image = !is_string($image) ? null : $image;
             if (!$form['errors'] && !is_string($image)) {
                 $path_image = $this->uploadImage($image);
-                if($modify){
+                if(isset($modify)){
                     $resMod = $this->postModel->modifyPost($form['form'], $path_image);
                 }else {
                     $res = $this->postModel->addPost($form['form'], $path_image);
@@ -74,7 +74,7 @@ class AdminPostController extends MainController{
                         strlen($value) > 30 ? $errors[$key] = 'Votre chapo est trop long' : $form[$key] = $value;
                         break;
                     case 'comment':
-                        strlen($value) > 255 ? $errors[$key] = 'Votre commentaire est trop long' : $form[$key] = $value;
+                        strlen($value) > 15000 ? $errors[$key] = 'Votre commentaire est trop long' : $form[$key] = $value;
                         break;
                     default:
                         break;
