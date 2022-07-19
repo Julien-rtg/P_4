@@ -6,7 +6,8 @@ use Controllers\{
     AllBlogPostsController,
     HomePageController, 
     Page404Controller,
-    PostController
+    PostController,
+    AccountController
 };
 use Controllers\admin\{
     AdminController,
@@ -20,6 +21,7 @@ class Router {
     public function __construct(){
         $this->router = new AltoRouter();
         $this->home = new HomePageController();
+        $this->account = new AccountController();
         $this->page_404 = new Page404Controller();
         $this->allBlogPosts = new AllBlogPostsController();
         $this->post = new PostController();
@@ -31,6 +33,16 @@ class Router {
         $uri = $_SERVER['REQUEST_URI'];
         // echo $uri; // Outputs: URI
         
+        // map loginpage
+        $this->router->map('GET|POST', '/p_4/login', function () {
+            $this->account->LoginPage();
+        });
+
+        // map registerpage
+        $this->router->map('GET|POST', '/p_4/register', function () {
+            $this->account->RegisterPage();
+        });
+
         // map homepage
         $this->router->map('GET|POST', '/p_4/', function () {
             $this->home->homePage();
