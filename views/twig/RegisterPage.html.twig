@@ -1,1 +1,70 @@
-<h1>S'inscrire</h1>
+<div class="container">
+    <h1 class="text-center mt-5 mb-5">Inscription</h1>
+
+    <form action="" method="post">
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group mb-3">
+                    {% if form['form']['last_name'] %} {# Si il y a une erreur dans le formulaire on reinsère la valeur dans l'input #}
+                        <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Nom" value="{{form['form']['last_name']}}">
+                    {% else %}
+                        <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Nom">
+                    {% endif %}
+                    {% if form['errors']['last_name'] %}
+                        <span class="badge bg-danger">{{form['errors']['last_name']}}</span>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group mb-3">
+                    {% if form['form']['first_name'] %} {# Si il y a une erreur dans le formulaire on reinsère la valeur dans l'input #}
+                        <input type="text" name="first_name" id="first_name" class="form-control" placeholder="Prénom" value="{{form['form']['first_name']}}">
+                    {% else %}
+                        <input type="text" name="first_name" id="first_name" class="form-control" placeholder="Prénom">
+                    {% endif %}
+                    {% if form['errors']['first_name'] %}
+                        <span class="badge bg-danger">{{form['errors']['first_name']}}</span>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+            
+        <div class="form-group mb-3">
+            {% if form['form']['email'] %} {# Si il y a une erreur dans le formulaire on reinsère la valeur dans l'input #}
+                <input type="text" name="email" id="email" class="form-control" placeholder="Adresse email" value="{{form['form']['email']}}">
+            {% else %}
+                <input type="text" name="email" id="email" class="form-control" placeholder="Adresse email">
+            {% endif %}
+            {% if form['errors']['email'] %}
+                <span class="badge bg-danger">{{form['errors']['email']}}</span>
+            {% endif %}
+        </div>
+        <div class="form-group mb-3">
+            {% if form['form']['password'] %}
+                <input type="password" name="password" id="password" class="form-control" placeholder="Mot de passe" value="{{form['form']['password']}}">
+             {% else %}
+                <input type="password" name="password" id="password" class="form-control" placeholder="Mot de passe">
+            {% endif %}
+            {% if form['errors']['password'] %}
+                <span class="badge bg-danger">{{form['errors']['password']}}</span>
+            {% endif %}
+        </div>
+        <div class="form-group mb-3">
+            {% if form['form']['confirm_password'] %}
+                <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirmation mot de passe" value="{{form['form']['confirm_password']}}">
+            {% else %}
+                <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirmation mot de passe">
+            {% endif %}
+            {% if form['errors']['confirm_password'] %}
+                <span class="badge bg-danger">{{form['errors']['confirm_password']}}</span>
+            {% endif %}
+        </div>
+        
+
+        <div class="form-group mt-2 mb-4">
+            <button class="btn btn-primary" type="submit">Inscription</button>
+        </div>
+    </form>
+</div>

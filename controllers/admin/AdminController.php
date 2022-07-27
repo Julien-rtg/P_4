@@ -8,13 +8,8 @@ use Models\PostsModel;
 
 class AdminController extends MainController{
 
-    public function adminPage($id=null){
+    public function adminPage($del=null){
         $this->postModel = new PostsModel();
-        // $posts = $this->postModel->getAllBlogPosts();
-        if($id){
-            $del = $this->postModel->deletePost($id);
-        }
-        
 
         if (isset($_GET['page']) && !empty($_GET['page'])) { // ON RECUP LA PAGE
             $currentPage = (int) strip_tags($_GET['page']);
@@ -49,8 +44,9 @@ class AdminController extends MainController{
     }
 
     public function deletePost($id){
-        // header('Location: /p_4/admin');
-        $this->adminPage($id);
+        $this->postModel = new PostsModel();
+        $del = $this->postModel->deletePost($id);
+        $this->adminPage($del);
     }
 
 }
