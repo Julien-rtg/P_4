@@ -94,8 +94,3 @@ class Router {
 
     
 }
-
-// dynamic named route
-// $router->map('GET|POST', '/users/[i:id]/', function($id) {
-//   require __DIR__ . '/views/user/details.php';
-// }, 'user-details');
