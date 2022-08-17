@@ -1,6 +1,15 @@
 <div class="container">
     <h1 class="text-center mt-5 mb-5">Inscription</h1>
 
+    {% if res == 1 %}
+        <div class="alert alert-success mt-3 mb-3" role="alert">
+            Compte créé !
+        </div>
+    {% elseif res %}
+        <div class="alert alert-danger mt-3 mb-3" role="alert">
+            Erreur lors de la création du compte
+        </div>
+    {% endif %}
     <form action="" method="post">
 
         <div class="row">
