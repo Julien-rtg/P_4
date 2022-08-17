@@ -3,10 +3,13 @@
 namespace Controllers;
 
 use Controllers\core\MainController;
+use Models\AccountsModel;
 
 
 class AccountController extends MainController
 {
+
+    private $account_model;
 
     public function LoginPage()
     {
@@ -26,23 +29,30 @@ class AccountController extends MainController
 
     public function RegisterPage()
     {
+        $this->account_model = new AccountsModel();
         // var_dump($_POST);
         if (!empty($_POST)) {
             $form = $this->checkDataForm($_POST);
             if (!$form['errors']) {
-                var_dump('true');
+                $mdp = password_hash($form['form']['password'], PASSWORD_DEFAULT);
+                $data = ['nom' => $form['form']['last_name'], 'prenom' => $form['form']['first_name'], 'email' => $form['form']['email'], 'mdp' => $mdp];
+                $res = $this->account_model->register($data);
+                if($res == 1){
+                    header('Location: /p_4');
+                }
             }
         }
 
-        $this->renderRegisterPage($form ?? null);
+        $this->renderRegisterPage($form ?? null, $res ?? null);
     }
 
     // $this->main_view = ./views/main.html/twig and is define in MainController
-    public function renderRegisterPage($form = null)
+    public function renderRegisterPage($form = null, $res=null)
     {
         echo $this->twig->render($this->main_view, [
             'body' => 'twig/RegisterPage.html.twig',
-            'form' => $form
+            'form' => $form,
+            'res' => $res
         ]);
     }
 
