@@ -13,7 +13,13 @@ class AccountController extends MainController
 
     public function LoginPage()
     {
-
+        if (!empty($_POST)) {
+            var_dump($_POST);
+            // $res = $this->account_model->login($_POST);
+            // if ($res == 1) {
+            //     header('Location: /p_4');
+            // }
+        }
 
         $this->renderLoginPage($form ?? null);
     }
