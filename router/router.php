@@ -33,6 +33,9 @@ class Router {
         $uri = $_SERVER['REQUEST_URI'];
         // echo $uri; // Outputs: URI
         
+        var_dump($_SESSION);
+        
+
         // map loginpage
         $this->router->map('GET|POST', '/p_4/login', function () {
             $this->account->LoginPage();

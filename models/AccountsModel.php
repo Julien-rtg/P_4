@@ -8,10 +8,11 @@ class AccountsModel extends MainModel
 {
 
 
-    public function getPost($id)
+    public function login($email)
     {
-        $query = 'select * from post';
-        $query .= ' where id = ' . $id;
+        $query = 'select mdp from utilisateur';
+        $query .= ' where email = "' . $email . '"';
+        // var_dump($query);
         return $this->db->query($query);
     }
 
@@ -23,6 +24,21 @@ class AccountsModel extends MainModel
         $query .= ' VALUES ("' . $datas['nom'] . '", "' . $datas['prenom'] . '", "' . $datas['email'] . '", "' . $datas['mdp'] . '", "0")';
         // var_dump($query);
         return $this->db->insert($query);
+    }
+
+    public function insertToken($email, $token){
+        $query = 'update utilisateur';
+        $query .= ' set `token`= "' . $token . '"';
+        $query .= ' where email = "' . $email . '"';
+        // var_dump($query);
+        return $this->db->insert($query);
+    }
+
+    public function checkToken($email, $token){
+        $query = 'select token from utilisateur';
+        $query .= ' where email = "' . $email . '"';
+        // var_dump($query);
+        return $this->db->query($query);
     }
 
 }
