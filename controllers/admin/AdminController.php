@@ -10,7 +10,6 @@ class AdminController extends MainController{
 
     public function adminPage($del=null){
         $this->postModel = new PostsModel();
-
         if (isset($_GET['page']) && !empty($_GET['page'])) { // ON RECUP LA PAGE
             $currentPage = (int) strip_tags($_GET['page']);
         } else {

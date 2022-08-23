@@ -13,12 +13,22 @@ class AccountController extends MainController
 
     public function LoginPage()
     {
+        $this->account_model = new AccountsModel();
         if (!empty($_POST)) {
-            var_dump($_POST);
-            // $res = $this->account_model->login($_POST);
-            // if ($res == 1) {
-            //     header('Location: /p_4');
-            // }
+            $form = $this->checkDataForm($_POST, true);
+            if (!$form['errors']) {
+                $hash = $this->account_model->login($form['form']['email']);
+                // var_dump($hash);
+                if (password_verify($form['form']['password'], $hash[0]['mdp'])) {
+                    $bytes = openssl_random_pseudo_bytes(32);
+                    $token = base64_encode($bytes);
+                    $this->account_model->insertToken($form['form']['email'], $token);
+                    $_SESSION["token"] = $token;
+                    $_SESSION["email"] = $form['form']['email'];
+                    header('Location: /p_4');
+                }
+                
+            }
         }
 
         $this->renderLoginPage($form ?? null);
@@ -62,7 +72,7 @@ class AccountController extends MainController
         ]);
     }
 
-    public function checkDataForm($formData)
+    public function checkDataForm($formData, $login=null)
     {
         $errors = [];
         $result = [];
@@ -85,7 +95,11 @@ class AccountController extends MainController
                             strlen($value) > 30 ? $errors[$key] = 'Votre prénom est trop long' : $form[$key] = $value;
                             break;
                         case 'password':
-                            strlen($value) < 6 ? $errors[$key] = 'Votre mot de passe est trop court' : $form[$key] = $value;
+                            if(!$login){
+                                strlen($value) < 6 ? $errors[$key] = 'Votre mot de passe est trop court' : $form[$key] = $value;
+                            }else {
+                                $form[$key] = $value;
+                            }
                             break;
                         case 'confirm_password':
                             $value != $formData['password'] ? $errors[$key] = 'Veuillez renseigner le même mot de passe' : $form[$key] = $value;
