@@ -47,7 +47,9 @@ class PostController extends MainController
             'post' => $post[0],
             'msg' => $msg,
             'comment' => $comment,
-            'dbComment' => $dbComment
+            'dbComment' => $dbComment,
+            'con' => $this->connected,
+            'role' => $this->role
         ]);
     }
 }

@@ -43,7 +43,9 @@ class AllBlogPostsController extends MainController
             'body' => 'twig/AllBlogPosts.html.twig',
             'posts' => $posts,
             'currentPage' => $currentPage,
-            'pages' => $pages
+            'pages' => $pages,
+            'con' => $this->connected,
+            'role' => $this->role
         ]);
     }
 

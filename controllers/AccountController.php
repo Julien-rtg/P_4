@@ -3,17 +3,14 @@
 namespace Controllers;
 
 use Controllers\core\MainController;
-use Models\AccountsModel;
 
 
 class AccountController extends MainController
 {
 
-    private $account_model;
 
     public function LoginPage()
     {
-        $this->account_model = new AccountsModel();
         if (!empty($_POST)) {
             $form = $this->checkDataForm($_POST, true);
             if (!$form['errors']) {
@@ -39,13 +36,14 @@ class AccountController extends MainController
     {
         echo $this->twig->render($this->main_view, [
             'body' => 'twig/LoginPage.html.twig',
-            'form' => $form
+            'form' => $form,
+            'con' => $this->connected,
+            'role' => $this->role
         ]);
     }
 
     public function RegisterPage()
     {
-        $this->account_model = new AccountsModel();
         // var_dump($_POST);
         if (!empty($_POST)) {
             $form = $this->checkDataForm($_POST);
@@ -68,10 +66,13 @@ class AccountController extends MainController
         echo $this->twig->render($this->main_view, [
             'body' => 'twig/RegisterPage.html.twig',
             'form' => $form,
-            'res' => $res
+            'res' => $res,
+            'con' => $this->connected,
+            'role' => $this->role
         ]);
     }
 
+    
     public function checkDataForm($formData, $login=null)
     {
         $errors = [];
@@ -131,6 +132,13 @@ class AccountController extends MainController
             }
         }
         return $result[] = ['errors' => $errors, 'form' => $form];
+    }
+
+    public function disconnect()
+    {
+        // var_dump('in');
+        session_unset();
+        header('Location: /p_4/login');
     }
 
 }

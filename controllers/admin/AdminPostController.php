@@ -53,7 +53,9 @@ class AdminPostController extends MainController{
             'error_image' => $error_image,
             'retourAdd' => $retourAdd,
             'mod' => $mod,
-            'retourMod' => $retourMod
+            'retourMod' => $retourMod,
+            'con' => $this->connected,
+            'role' => $this->role
         ]);
     }
 
