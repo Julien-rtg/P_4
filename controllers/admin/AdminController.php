@@ -38,7 +38,9 @@ class AdminController extends MainController{
             'posts' => $posts,
             'currentPage' => $currentPage,
             'pages' => $pages,
-            'retourDel' => $del
+            'retourDel' => $del,
+            'con' => $this->connected,
+            'role' => $this->role
         ]);
     }
 

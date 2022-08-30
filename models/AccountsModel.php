@@ -34,8 +34,15 @@ class AccountsModel extends MainModel
         return $this->db->insert($query);
     }
 
-    public function checkToken($email, $token){
+    public function checkToken($email){
         $query = 'select token from utilisateur';
+        $query .= ' where email = "' . $email . '"';
+        // var_dump($query);
+        return $this->db->query($query);
+    }
+
+    public function getRole($email){
+        $query = 'select role from utilisateur';
         $query .= ' where email = "' . $email . '"';
         // var_dump($query);
         return $this->db->query($query);

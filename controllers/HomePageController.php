@@ -13,7 +13,6 @@ class HomePageController extends MainController {
                 $mail = $this->mail->sendMail($form['form']);
             }
         }
-
         $this->renderHomePage($form ?? null, $mail ?? null);
     }
     
@@ -22,7 +21,9 @@ class HomePageController extends MainController {
         echo $this->twig->render($this->main_view, [
             'body' => 'twig/HomePage.html.twig',
             'form' => $form,
-            'mail' => $mail
+            'mail' => $mail,
+            'con' => $this->connected,
+            'role' => $this->role
         ]);
     }
 
