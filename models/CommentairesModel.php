@@ -7,6 +7,13 @@ use Models\core\MainModel;
 class CommentairesModel extends MainModel
 {
 
+    public function getUnvalidateComment(){
+        $query = 'select post.titre, commentaire.id,commentaire.id_post,commentaire.id_utilisateur, commentaire.contenu, commentaire.date, utilisateur.nom, utilisateur.prenom from commentaire';
+        $query .= ' inner join utilisateur on commentaire.id_utilisateur = utilisateur.id';
+        $query .= ' inner join post on commentaire.id_post = post.id';
+        $query .= ' where valider = 0';
+        return $this->db->query($query);
+    }
     public function getCommentaire($id_post){
         $query = 'select commentaire.id,commentaire.id_post,commentaire.id_utilisateur, commentaire.contenu, commentaire.date, utilisateur.nom, utilisateur.prenom from commentaire';
         $query .= ' inner join utilisateur on commentaire.id_utilisateur = utilisateur.id';
