@@ -7,11 +7,13 @@ use Controllers\{
     HomePageController, 
     Page404Controller,
     PostController,
-    AccountController
+    AccountController,
+    
 };
 use Controllers\admin\{
     AdminController,
-    AdminPostController
+    AdminPostController,
+    CommentaireController
 };
 use Controllers\core\MainController;
 
@@ -29,6 +31,7 @@ class Router {
         $this->admin = new AdminController();
         $this->adminAdd = new AdminPostController();
         $this->mainController = new MainController();
+        $this->commentaireController = new CommentaireController();
     }
 
     public function routeMap(){
@@ -65,6 +68,11 @@ class Router {
                 // map admin accueil
                 $this->router->map('GET|POST', '/p_4/admin', function () {
                     $this->admin->adminPage();
+                });
+
+                // map commentaires validation
+                $this->router->map('GET|POST', '/p_4/commentaires', function () {
+                    $this->commentaireController->commentairePage();
                 });
         
                 // map admin add post
