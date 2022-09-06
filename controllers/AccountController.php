@@ -14,14 +14,15 @@ class AccountController extends MainController
         if (!empty($_POST)) {
             $form = $this->checkDataForm($_POST, true);
             if (!$form['errors']) {
-                $hash = $this->account_model->login($form['form']['email']);
-                // var_dump($hash);
-                if (password_verify($form['form']['password'], $hash[0]['mdp'])) {
+                $res = $this->account_model->login($form['form']['email']);
+                // var_dump($res);
+                if (password_verify($form['form']['password'], $res[0]['mdp'])) {
                     $bytes = openssl_random_pseudo_bytes(32);
                     $token = base64_encode($bytes);
                     $this->account_model->insertToken($form['form']['email'], $token);
                     $_SESSION["token"] = $token;
                     $_SESSION["email"] = $form['form']['email'];
+                    $_SESSION["id"] = $res[0]['id'];
                     header('Location: /p_4');
                 }
                 
@@ -47,13 +48,19 @@ class AccountController extends MainController
         // var_dump($_POST);
         if (!empty($_POST)) {
             $form = $this->checkDataForm($_POST);
-            if (!$form['errors']) {
-                $mdp = password_hash($form['form']['password'], PASSWORD_DEFAULT);
-                $data = ['nom' => $form['form']['last_name'], 'prenom' => $form['form']['first_name'], 'email' => $form['form']['email'], 'mdp' => $mdp];
-                $res = $this->account_model->register($data);
-                if($res == 1){
-                    header('Location: /p_4');
+            $check = $this->account_model->checkEmail($_POST['email']);
+            // var_dump($check);
+            if(empty($check)){
+                if (!$form['errors']) {
+                    $mdp = password_hash($form['form']['password'], PASSWORD_DEFAULT);
+                    $data = ['nom' => $form['form']['last_name'], 'prenom' => $form['form']['first_name'], 'email' => $form['form']['email'], 'mdp' => $mdp];
+                    $res = $this->account_model->register($data);
+                    if($res == 1){
+                        $this->LoginPage();
+                    }
                 }
+            }else {
+                $form['errors']['email'] = 'Email déjà éxistante';
             }
         }
 
@@ -90,10 +97,10 @@ class AccountController extends MainController
                 } else { // ON REGARDE LA TAILLE DES VALEURS
                     switch ($key) { // ON FAIT UN SWITCH POUR LES MSGS D'ERREURS
                         case 'first_name':
-                            strlen($value) > 30 ? $errors[$key] = 'Votre nom est trop long' : $form[$key] = $value;
+                            strlen($value) > 50 ? $errors[$key] = 'Votre nom est trop long' : $form[$key] = $value;
                             break;
                         case 'last_name':
-                            strlen($value) > 30 ? $errors[$key] = 'Votre prénom est trop long' : $form[$key] = $value;
+                            strlen($value) > 50 ? $errors[$key] = 'Votre prénom est trop long' : $form[$key] = $value;
                             break;
                         case 'password':
                             if(!$login){

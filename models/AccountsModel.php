@@ -10,7 +10,7 @@ class AccountsModel extends MainModel
 
     public function login($email)
     {
-        $query = 'select mdp from utilisateur';
+        $query = 'select id, mdp from utilisateur';
         $query .= ' where email = "' . $email . '"';
         // var_dump($query);
         return $this->db->query($query);
@@ -44,6 +44,22 @@ class AccountsModel extends MainModel
     public function getRole($email){
         $query = 'select role from utilisateur';
         $query .= ' where email = "' . $email . '"';
+        // var_dump($query);
+        return $this->db->query($query);
+    }
+
+    public function checkEmail($email)
+    {
+        $query = 'select email from utilisateur';
+        $query .= ' where email = "' . $email . '"';
+        // var_dump($query);
+        return $this->db->query($query);
+    }
+
+    public function getUserFromId($id)
+    {
+        $query = 'select nom,prenom from utilisateur';
+        $query .= ' where id = "' . $id . '"';
         // var_dump($query);
         return $this->db->query($query);
     }

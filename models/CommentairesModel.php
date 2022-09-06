@@ -8,8 +8,9 @@ class CommentairesModel extends MainModel
 {
 
     public function getCommentaire($id_post){
-        $query = 'select * from commentaire';
-        $query .= ' where id_post = '.$id_post;
+        $query = 'select commentaire.id,commentaire.id_post,commentaire.id_utilisateur, commentaire.contenu, commentaire.date, utilisateur.nom, utilisateur.prenom from commentaire';
+        $query .= ' inner join utilisateur on commentaire.id_utilisateur = utilisateur.id';
+        $query .= ' and id_post = '.$id_post . ' and valider = 1';
         return $this->db->query($query);
     }
 
