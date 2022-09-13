@@ -89,6 +89,16 @@ class Router {
                 $this->router->map('GET|POST', '/p_4/delete_post/[i:id]', function ($id) {
                     $this->admin->deletePost($id);
                 });
+
+                // map admin confirm com
+                $this->router->map('GET|POST', '/p_4/confirm/[i:id]', function ($id) {
+                    $this->commentaireController->confirmCom($id);
+                });
+        
+                // map admin reject com
+                $this->router->map('GET|POST', '/p_4/reject/[i:id]', function ($id) {
+                    $this->commentaireController->rejectCom($id);
+                });
             }
     
             // map disconnect

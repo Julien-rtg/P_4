@@ -20,21 +20,23 @@ class PostController extends MainController
         $this->postModel = new PostsModel();
         $this->comModel = new CommentairesModel();
         $this->accModel = new AccountsModel();
-        $id = $_SESSION['id'];
-        $post = $this->postModel->getPost($id);
-        $dbComment = $this->comModel->getCommentaire($id);
+        $id_user = $_SESSION['id'];
+        $id_post = $_GET['id'];
+        // var_dump($id);
+        $post = $this->postModel->getPost($id_post);
+        $dbComment = $this->comModel->getCommentaire($post[0]['id']);
         $comment = isset($_POST['commentaire']) ? $_POST['commentaire'] : null;
         if($comment){
-            $msg = $this->addCommentaire($comment, $id);
+            $msg = $this->addCommentaire($comment, $id_post, $id_user);
         } else if ($comment === '') {
             $comment = 'error';
         }
         $this->renderPost($post ?? null, $msg ?? null, $comment, $dbComment ?? null);
     }
 
-    public function addCommentaire($comment, $id){
+    public function addCommentaire($comment,$id_post, $id_user){
         $date = date("Y-m-d H:i:s", strtotime('+2 hours'));
-        $result = $this->comModel->addCommentaire($comment, $id, $date);
+        $result = $this->comModel->addCommentaire($comment, $id_post,$id_user, $date);
         if($result == false){
             $result = 'false';
         }

@@ -9,26 +9,39 @@ use Models\CommentairesModel;
 class CommentaireController extends MainController
 {
 
-    public function commentairePage()
+    public function commentairePage($valid=null, $reject=null)
     {
+        // var_dump($res);
         $this->model = new CommentairesModel();
         $com = $this->model->getUnvalidateComment();
-        var_dump($com);
 
-        $this->renderCommentairePage($com);
+        $this->renderCommentairePage($com, $valid, $reject);
     }
 
 
     // $this->main_view = ./views/main.html/twig and is define in MainController
-    public function renderCommentairePage($com)
+    public function renderCommentairePage($com, $valid, $reject)
     {
         echo $this->twig->render($this->main_view, [
             'body' => 'twig/admin/Commentaire.html.twig',
-            'com' => $com,
+            'commentaires' => $com,
             'con' => $this->connected,
-            'role' => $this->role
-
+            'role' => $this->role,
+            'valid' => $valid,
+            'reject' => $reject
         ]);
+    }
+
+    public function confirmCom($id){
+        $this->model = new CommentairesModel();
+        $res = $this->model->validateCom($id);
+        $this->commentairePage($res);
+    }
+
+    public function rejectCom($id){
+        $this->model = new CommentairesModel();
+        $res = $this->model->rejectCom($id);
+        $this->commentairePage(false,$res);
     }
 
 }
