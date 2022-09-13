@@ -12,7 +12,8 @@ class AccountController extends MainController
     public function LoginPage()
     {
         if (!empty($_POST)) {
-            $form = $this->checkDataForm($_POST, true);
+            $post = $_POST;
+            $form = $this->checkDataForm($post, true);
             if (!$form['errors']) {
                 $res = $this->account_model->login($form['form']['email']);
                 // var_dump($res);

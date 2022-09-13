@@ -3,6 +3,9 @@
 namespace Models;
 
 use Models\core\MainModel;
+use PDO;
+
+
 
 class AccountsModel extends MainModel
 {
@@ -10,10 +13,15 @@ class AccountsModel extends MainModel
 
     public function login($email)
     {
-        $query = 'select id, mdp from utilisateur';
-        $query .= ' where email = "' . $email . '"';
-        // var_dump($query);
-        return $this->db->query($query);
+        $stmt = $this->conn->prepare('SELECT id, mdp FROM utilisateur WHERE email = :email');
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        if($stmt->execute()){
+            return $stmt->fetchAll();
+        }else {
+            return false;
+        }
+        // return $this->db->query($query);
+        
     }
 
     public function register($datas)

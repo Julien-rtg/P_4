@@ -20,7 +20,7 @@ class Database extends Config {
             return $dbh;
         } catch (\PDOException $e) {
             print "Erreur !: " . $e->getMessage() . "<br/>";
-            die();
+            exit();
         }
     }
 

@@ -1,41 +1,48 @@
-.titleHomePage{
+.titleHomePage {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-.bgPagi{
+
+.bgPagi {
     background-color: #2c3e50 !important;
 }
-.titleHomePage img{
+
+.titleHomePage img {
     height: 200px;
     width: 200px;
     border-radius: 50%;
     display: flex;
     align-self: center;
 }
-.bgLightDark{
+
+.bgLightDark {
     background-color: rgb(245, 245, 245);
 }
-.container-fluid{
-    padding-bottom: 0%!important;
+
+.container-fluid {
+    padding-bottom: 0% !important;
 }
-.width100{
+
+.width100 {
     width: 100%;
 }
 /* HOME */
-    .linkHomePage{
+    .linkHomePage {
         position: fixed;
         height: 50px;
         bottom: 0;
         width: 100%;
         text-align: center;
     }
-    .containerForm{
+
+    .containerForm {
         width: 99vw;
         background-color: white;
         min-height: 500px;
     }
-    .link{
+
+    .link {
         display: flex;
         justify-content: center;
         height: 100%;
@@ -43,50 +50,60 @@
     }
 /* HOME */
 /* POST */
-    .hrPost{
+    .hrPost {
         width: 90%;
     }
-    .blocImg{
+
+    .blocImg {
         width: 400px;
         height: 400px;
     }
-    .imgPost{
+
+    .imgPost {
         width: 100%;
         border-radius: 2%;
     }
-    .blocPost{
+
+    .blocPost {
         width: 99vw;
     }
-    .leftBlocPost, .rightBlocPost{
+
+    .leftBlocPost, .rightBlocPost {
         width: 50%;
         border-radius: 1%;
     }
-    .descriptionPost{
+
+    .descriptionPost {
         width: 80%;
     }
-    .bottomBlocPost{
-        background-color: rgba(var(--bs-primary-rgb),var(--bs-bg-opacity))!important;
+
+    .bottomBlocPost {
+        background-color: rgba(var(--bs-primary-rgb),var(--bs-bg-opacity)) !important;
         width: 99vw;
     }
-    .botPost{
+
+    .botPost {
         width: 100%;
     }
-    .addCommentaire, .displayCommentaire, .com{
+
+    .addCommentaire, .displayCommentaire, .com {
         width: 100%;
     }
-    .com{
+
+    .com {
         border-radius: 0.25rem;
     }
-    .creditsCom{
+
+    .creditsCom {
         width: 100%;
     }
-    .card-img-top{
+
+    .card-img-top {
         height: 300px;
     }
-    .card-content{
+
+    .card-content {
         height: 140px;
     }
 
 /* POST */
-/*  */
-/*  */
