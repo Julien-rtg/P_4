@@ -10,14 +10,15 @@ use PDO;
 class AccountsModel extends MainModel
 {
 
+    private $returnDatas = [];
 
     public function login(string $email)
     {
         $stmt = $this->conn->prepare('SELECT id, mdp FROM utilisateur WHERE email = :email');
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         if($stmt->execute()){
-            $datas = $stmt->fetchAll();
-            return $datas;
+            $this->returnDatas = $stmt->fetchAll();
+            return $this->returnDatas;
         }else {
             return false;
         }
