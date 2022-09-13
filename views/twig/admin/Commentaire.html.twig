@@ -1,5 +1,78 @@
 <div class="container">
+    {% if valid == 1 %}
+        <div class="alert alert-success mt-3 mb-3" role="alert">
+            Commentaire validé !
+        </div>
+    {% elseif valid %}
+        <div class="alert alert-danger mt-3 mb-3" role="alert">
+            Erreur lors de la validation du commentaire
+        </div>
+    {% endif %}
+    {% if reject == 1 %}
+        <div class="alert alert-warning mt-3 mb-3" role="alert">
+            Commentaire supprimé !
+        </div>
+    {% elseif reject %}
+        <div class="alert alert-danger mt-3 mb-3" role="alert">
+            Erreur lors de la supression du commentaire
+        </div>
+    {% endif %}
     <h2 class="text-center mt-4 mb-4">Liste des commentaires en attente de validation</h2>
 
-    
+    <div class="row d-flex justify-content-center">
+        <table class="table">
+            <thead class="text-center">
+                <tr>
+                <th scope="col">Titre de l'article</th>
+                <th scope="col">Utilisateur</th>
+                <th scope="col">Contenu</th>
+                <th scope="col">Date</th>
+                <th scope="col">Valider</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                {% for com in commentaires %}
+                    <tr>
+                    <th scope="row">{{com.titre}}</th>
+                    <td><span>{{com.nom}} </span> {{com.prenom}}</td>
+                    <td>{{com.contenu}}</td>
+                    <td>{{com.date}}</td>
+                    <td>
+                        <button class="btn btn-success btn-sm me-2" data-bs-toggle="modal" data-bs-target="#comModal{{com.id}}">Oui</button>
+                        <button class="btn btn-danger btn-sm me-2" data-bs-toggle="modal" data-bs-target="#delComModal{{com.id}}">Non</button>
+                    </td>
+                    </tr>
+                    <div class="modal fade" id="comModal{{com.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Êtes vous sur de vouloir valider ce commentaire ?</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                    <a href="/p_4/confirm/{{com.id}}" type="button" class="btn btn-success">Valider</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="delComModal{{com.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Êtes vous sur de vouloir supprimer ce commentaire ?</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                    <a href="/p_4/reject/{{com.id}}" type="button" class="btn btn-danger">Supprimer</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+    </div>
 </div>
