@@ -9,9 +9,8 @@ use Models\CommentairesModel;
 class CommentaireController extends MainController
 {
 
-    public function commentairePage($valid=null, $reject=null)
+    public function commentairePage(bool $valid=false, bool $reject=false): void
     {
-        // var_dump($res);
         $this->model = new CommentairesModel();
         $com = $this->model->getUnvalidateComment();
 
@@ -20,7 +19,7 @@ class CommentaireController extends MainController
 
 
     // $this->main_view = ./views/main.html/twig and is define in MainController
-    public function renderCommentairePage($com, $valid, $reject)
+    public function renderCommentairePage(array $com, bool $valid, bool $reject): void
     {
         echo $this->twig->render($this->main_view, [
             'body' => 'twig/admin/Commentaire.html.twig',
@@ -32,13 +31,15 @@ class CommentaireController extends MainController
         ]);
     }
 
-    public function confirmCom($id){
+    public function confirmCom(string $id): void
+    {
         $this->model = new CommentairesModel();
         $res = $this->model->validateCom($id);
         $this->commentairePage($res);
     }
 
-    public function rejectCom($id){
+    public function rejectCom(string $id): void
+    {
         $this->model = new CommentairesModel();
         $res = $this->model->rejectCom($id);
         $this->commentairePage(false,$res);

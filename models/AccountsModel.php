@@ -23,11 +23,9 @@ class AccountsModel extends MainModel
 
     public function register(array $datas): ?bool
     {
-        // var_dump($post);
         $query = 'insert into utilisateur';
         $query .= ' (`nom`, `prenom`, `email`, `mdp`, `role`)';
         $query .= ' VALUES ("' . $datas['nom'] . '", "' . $datas['prenom'] . '", "' . $datas['email'] . '", "' . $datas['mdp'] . '", "0")';
-        // var_dump($query);
         return $this->db->insert($query);
     }
 

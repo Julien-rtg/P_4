@@ -9,14 +9,13 @@ class AccountController extends MainController
 {
 
 
-    public function LoginPage()
+    public function loginPage(): void
     {
         if (!empty($_POST)) {
             $post = $_POST;
             $form = $this->checkDataForm($post, true);
             if (!$form['errors']) {
                 $res = $this->account_model->login($form['form']['email']);
-                // var_dump($res);
                 if (password_verify($form['form']['password'], $res[0]['mdp'])) {
                     $bytes = openssl_random_pseudo_bytes(32);
                     $token = base64_encode($bytes);
@@ -34,7 +33,7 @@ class AccountController extends MainController
     }
 
     // $this->main_view = ./views/main.html/twig and is define in MainController
-    public function renderLoginPage($form = null)
+    public function renderLoginPage(array $form = null): void
     {
         echo $this->twig->render($this->main_view, [
             'body' => 'twig/LoginPage.html.twig',
@@ -44,13 +43,11 @@ class AccountController extends MainController
         ]);
     }
 
-    public function RegisterPage()
+    public function registerPage(): void
     {
-        // var_dump($_POST);
         if (!empty($_POST)) {
             $form = $this->checkDataForm($_POST);
             $check = $this->account_model->checkEmail($_POST['email']);
-            // var_dump($check);
             if(empty($check)){
                 if (!$form['errors']) {
                     $mdp = password_hash($form['form']['password'], PASSWORD_DEFAULT);
@@ -69,7 +66,7 @@ class AccountController extends MainController
     }
 
     // $this->main_view = ./views/main.html/twig and is define in MainController
-    public function renderRegisterPage($form = null, $res=null)
+    public function renderRegisterPage(array $form = null, bool $res=null): void
     {
         echo $this->twig->render($this->main_view, [
             'body' => 'twig/RegisterPage.html.twig',
@@ -81,7 +78,7 @@ class AccountController extends MainController
     }
 
     
-    public function checkDataForm($formData, $login=null)
+    public function checkDataForm(array $formData, bool $login=null): ?array
     {
         $errors = [];
         $result = [];
@@ -142,9 +139,8 @@ class AccountController extends MainController
         return $result[] = ['errors' => $errors, 'form' => $form];
     }
 
-    public function disconnect()
+    public function disconnect(): void
     {
-        // var_dump('in');
         session_unset();
         header('Location: /p_4/login');
     }

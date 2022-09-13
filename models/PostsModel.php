@@ -22,9 +22,6 @@ class PostsModel extends MainModel{
 
     public function getLimitBlogPosts(int $first, int $perPage): ?array
     {
-        // $query = 'SELECT * FROM `post` ORDER BY `date_maj` DESC LIMIT '.$first.','.$perPage;
-        // return $this->db->query($query);
-
         $stmt = $this->conn->prepare('SELECT * FROM `post` ORDER BY `date_maj` DESC LIMIT :first, :perPage');
         $stmt->bindParam(':first', $first, PDO::PARAM_INT);
         $stmt->bindParam(':perPage', $perPage, PDO::PARAM_INT);
@@ -48,11 +45,9 @@ class PostsModel extends MainModel{
 
     public function addPost(string $post, string $path): ?bool
     {
-        // var_dump($post);
         $query = 'insert into post';
         $query .= ' (`titre`, `image`, `chapo`, `contenu`, `id_utilisateur`)';
         $query .= ' VALUES ("'.$post['title'].'", "'.$path .'", "' . $post['chapo'] . '", "' . $post['comment'] . '", "1")';
-        // var_dump($query);
         return $this->db->insert($query);
     }
 
@@ -82,5 +77,4 @@ class PostsModel extends MainModel{
         } 
 
     }
-
 }

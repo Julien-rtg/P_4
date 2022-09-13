@@ -6,7 +6,8 @@ use Controllers\core\MainController;
 
 class HomePageController extends MainController {
 
-    public function homePage(){
+    public function homePage(): void
+    {
         if(!empty($_POST)){
             $form = $this->checkDataContactForm($_POST);
             if(!$form['errors']){
@@ -17,7 +18,8 @@ class HomePageController extends MainController {
     }
     
     // $this->main_view = ./views/main.html/twig and is define in MainController
-    public function renderHomePage($form = null, $mail = null){
+    public function renderHomePage(array $form = null, bool $mail = null): void
+    {
         echo $this->twig->render($this->main_view, [
             'body' => 'twig/HomePage.html.twig',
             'form' => $form,
@@ -27,7 +29,8 @@ class HomePageController extends MainController {
         ]);
     }
 
-    public function checkDataContactForm($formData){
+    public function checkDataContactForm(array $formData): ?array
+    {
         $errors = [];
         $result = [];
         $form = [];

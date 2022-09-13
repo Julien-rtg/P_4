@@ -8,7 +8,8 @@ use Models\PostsModel;
 
 class AdminController extends MainController{
 
-    public function adminPage($del=null){
+    public function adminPage(bool $del=false): void
+    {
         $this->postModel = new PostsModel();
         if (isset($_GET['page']) && !empty($_GET['page'])) { // ON RECUP LA PAGE
             $currentPage = (int) strip_tags($_GET['page']);
@@ -30,7 +31,7 @@ class AdminController extends MainController{
     }
 
     // $this->main_view = ./views/main.html/twig and is define in MainController
-    public function renderAdminPage($posts, $currentPage, $pages, $del)
+    public function renderAdminPage(array $posts, string $currentPage, string $pages, bool $del): void
     {
         // var_dump($del);
         echo $this->twig->render($this->main_view, [
@@ -44,10 +45,10 @@ class AdminController extends MainController{
         ]);
     }
 
-    public function deletePost($id){
+    public function deletePost(string $id): void
+    {
         $this->postModel = new PostsModel();
         $del = $this->postModel->deletePost($id);
         $this->adminPage($del);
     }
-
 }
