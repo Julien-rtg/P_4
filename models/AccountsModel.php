@@ -12,7 +12,7 @@ class AccountsModel extends MainModel
 
     private $returnDatas = [];
 
-    public function login(string $email)
+    public function login(string $email): ?array
     {
         $stmt = $this->conn->prepare('SELECT id, mdp FROM utilisateur WHERE email = :email');
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
@@ -20,13 +20,11 @@ class AccountsModel extends MainModel
             $this->returnDatas = $stmt->fetchAll();
             return $this->returnDatas;
         }else {
-            return false;
-        }
-        // return $this->db->query($query);
-        
+            return null;
+        } 
     }
 
-    public function register(array $datas)
+    public function register(array $datas): bool
     {
         // var_dump($post);
         $query = 'insert into utilisateur';
