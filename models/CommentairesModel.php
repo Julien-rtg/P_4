@@ -3,11 +3,13 @@
 namespace Models;
 
 use Models\core\MainModel;
+use PDO;
 
 class CommentairesModel extends MainModel
 {
 
-    public function getUnvalidateComment(){
+    public function getUnvalidateComment(): ?array
+    {
         $query = 'select post.titre, commentaire.id,commentaire.id_post,commentaire.id_utilisateur, commentaire.contenu, commentaire.date, utilisateur.nom, utilisateur.prenom from commentaire';
         $query .= ' inner join utilisateur on commentaire.id_utilisateur = utilisateur.id';
         $query .= ' inner join post on commentaire.id_post = post.id';
@@ -15,7 +17,8 @@ class CommentairesModel extends MainModel
         // var_dump($query);
         return $this->db->query($query);
     }
-    public function getCommentaire($id_post){
+    public function getCommentaire(string $id_post): ?array
+    {
         $query = 'select distinct commentaire.id,commentaire.id_post,commentaire.id_utilisateur, commentaire.contenu, commentaire.date, utilisateur.nom, utilisateur.prenom from commentaire';
         $query .= ' inner join utilisateur on commentaire.id_utilisateur = utilisateur.id';
         $query .= ' inner join post on commentaire.id_post = ' . $id_post;
@@ -23,7 +26,7 @@ class CommentairesModel extends MainModel
         return $this->db->query($query);
     }
 
-    public function addCommentaire($comment, $id_post, $id_user, $date)
+    public function addCommentaire(string $comment, string $id_post, string $id_user, string $date): ?bool
     {
         $query = 'insert into commentaire';
         $query .= ' (`id_post`, `id_utilisateur`, `contenu`, `date`, `valider`)';
@@ -32,21 +35,25 @@ class CommentairesModel extends MainModel
         return $this->db->insert($query);
     }
 
-    public function validateCom($id){
-        $query = 'update commentaire';
-        $query .= ' set `valider` = "1"';
-        $query .= ' where id = ' . $id;
-        return $this->db->insert($query);
-    }
-
-    public function rejectCom($id){
-        $query = 'delete from commentaire';
-        $query .= ' where id = ' . $id;
-        // var_dump($query);
-        if ($this->db->insert($query)) {
+    public function validateCom(string $id): ?bool
+    {
+        $stmt = $this->conn->prepare('update commentaire set valider = 1 WHERE id = :id');
+        $stmt->bindParam(':id', $id, PDO::PARAM_STR);
+        if ($stmt->execute()) {
             return true;
         } else {
             return false;
-        }
+        } 
+    }
+
+    public function rejectCom(string $id): ?bool
+    {
+        $stmt = $this->conn->prepare('delete from commentaire WHERE id = :id');
+        $stmt->bindParam(':id', $id, PDO::PARAM_STR);
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        } 
     }
 }
