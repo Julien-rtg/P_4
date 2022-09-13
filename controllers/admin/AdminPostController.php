@@ -8,7 +8,7 @@ use Models\PostsModel;
 
 class AdminPostController extends MainController{
 
-    public function addPost($post=null)
+    public function addPost(array $post=[]): void
     {
         $this->postModel = new PostsModel();
         if($post){
@@ -33,19 +33,18 @@ class AdminPostController extends MainController{
                 }
             }
         }
-        $this->renderAddPage($form ?? null, $error_image ?? null, $res ?? null, $modify ?? null, $resMod ?? null);
+        $this->renderAddPage($form ?? [], $error_image ?? false, $res ?? false, $modify ?? false, $resMod ?? false);
     }
 
-    public function modifyPost($id)
+    public function modifyPost(string $id): void
     {
         $this->postModel = new PostsModel();
         $post = $this->postModel->getPost($id);
-        // var_dump($post);
         $this->addPost($post);
     }
 
     // $this->main_view = ./views/main.html/twig and is define in MainController
-    public function renderAddPage($form, $error_image, $retourAdd, $mod, $retourMod)
+    public function renderAddPage(array $form, bool $error_image, bool $retourAdd, bool $mod, bool $retourMod): void
     {
         echo $this->twig->render($this->main_view, [
             'body' => 'twig/admin/AddPost.html.twig',
@@ -59,9 +58,8 @@ class AdminPostController extends MainController{
         ]);
     }
 
-    private function checkDataPostForm($formData)
+    private function checkDataPostForm(array $formData): ?array
     {
-        // var_dump($formData);
         $errors = [];
         $result = [];
         $form = [];
@@ -100,9 +98,9 @@ class AdminPostController extends MainController{
         return $result[] = ['errors' => $errors, 'form' => $form];
     }
 
-    private function checkImage($image){
+    private function checkImage(array $image): ?array
+    {
         $image = $image['image'];
-        // var_dump($image);
         if($image['error'] == 4){
             return $res['error'] = 'Veuillez renseigner une image';
         } else if($image['size'] > 10485760){ // 10 
@@ -114,14 +112,13 @@ class AdminPostController extends MainController{
         }
     }
 
-    private function uploadImage($image){
+    private function uploadImage($image): ?string
+    {
         $uploadDir = 'ressources/img/';
         $fileNameCmps = explode(".", $image['name']);
         $fileExtension = strtolower(end($fileNameCmps));
         $newFileName = md5(time() . $image['name']) . '.' . $fileExtension;
         $uploadFile = $uploadDir . $newFileName;
-        // var_dump($file_name);
-        // var_dump($image);
         if (move_uploaded_file($image['tmp_name'], $uploadFile)) {
             return $newFileName;
         }

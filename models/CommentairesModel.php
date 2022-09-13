@@ -14,7 +14,6 @@ class CommentairesModel extends MainModel
         $query .= ' inner join utilisateur on commentaire.id_utilisateur = utilisateur.id';
         $query .= ' inner join post on commentaire.id_post = post.id';
         $query .= ' where valider = 0';
-        // var_dump($query);
         return $this->db->query($query);
     }
     public function getCommentaire(string $id_post): ?array
@@ -31,7 +30,6 @@ class CommentairesModel extends MainModel
         $query = 'insert into commentaire';
         $query .= ' (`id_post`, `id_utilisateur`, `contenu`, `date`, `valider`)';
         $query .= ' VALUES ('.$id_post.', '.$id_user.', "'.$comment.'", "'.$date.'", 0)';
-        // var_dump($query);
         return $this->db->insert($query);
     }
 

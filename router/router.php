@@ -34,11 +34,9 @@ class Router {
         $this->commentaireController = new CommentaireController();
     }
 
-    public function routeMap(){
+    public function routeMap(): void
+    {
         $uri = $_SERVER['REQUEST_URI'];
-        // echo $uri; // Outputs: URI
-        
-        // var_dump($_SESSION);
         if($this->mainController->getConnection()){
             // map loginpage
             $this->router->map('GET|POST', '/p_4/login', function () {
@@ -113,12 +111,12 @@ class Router {
             }
             // map loginpage
             $this->router->map('GET|POST', '/p_4/login', function () {
-                $this->account->LoginPage();
+                $this->account->loginPage();
             });
 
             // map registerpage
             $this->router->map('GET|POST', '/p_4/register', function () {
-                $this->account->RegisterPage();
+                $this->account->registerPage();
             });
 
         }
@@ -126,12 +124,12 @@ class Router {
         $this->checkMatch($match);
     }
 
-    public function checkMatch($match){
+    public function checkMatch($match): void
+    {
         if (is_array($match) && is_callable($match['target'])) {
             call_user_func_array($match['target'], $match['params']);
         } else {
             // no route was matched throw 404
-            // header($_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
             $this->page_404->renderPage404();
         }
     }

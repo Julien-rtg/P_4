@@ -12,7 +12,7 @@ class AllBlogPostsController extends MainController
     private $postModel;
 
 
-    public function allBlogPosts()
+    public function allBlogPosts(): void
     {
         $this->postModel = new PostsModel();
         // $posts = $this->postModel->getAllBlogPosts();
@@ -37,7 +37,7 @@ class AllBlogPostsController extends MainController
     }
 
     // $this->main_view = ./views/main.html/twig and is define in MainController
-    public function renderAllBlogPosts($posts, $currentPage, $pages)
+    public function renderAllBlogPosts(array $posts, string $currentPage, string $pages): void
     {
         echo $this->twig->render($this->main_view, [
             'body' => 'twig/AllBlogPosts.html.twig',
@@ -48,5 +48,4 @@ class AllBlogPostsController extends MainController
             'role' => $this->role
         ]);
     }
-
 }
