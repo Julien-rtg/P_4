@@ -15,8 +15,6 @@ class AllBlogPostsController extends MainController
     public function allBlogPosts(): void
     {
         $this->postModel = new PostsModel();
-        // $posts = $this->postModel->getAllBlogPosts();
-
         if (isset($_GET['page']) && !empty($_GET['page'])) { // ON RECUP LA PAGE
             $currentPage = (int) strip_tags($_GET['page']);
         } else {

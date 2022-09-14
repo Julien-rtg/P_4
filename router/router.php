@@ -105,7 +105,6 @@ class Router {
             });
             
         } else {
-            // var_dump($uri);
             if($uri != '/p_4/login' && $uri != '/p_4/register'){
                 header('Location: /p_4/login');
             }
@@ -121,16 +120,18 @@ class Router {
 
         }
         $match = $this->router->match();
-        $this->checkMatch($match);
-    }
-
-    public function checkMatch($match): void
-    {
-        if (is_array($match) && is_callable($match['target'])) {
-            call_user_func_array($match['target'], $match['params']);
+        if(is_array($match)){
+            $this->checkMatch($match);
         } else {
             // no route was matched throw 404
             $this->page_404->renderPage404();
+        }
+    }
+
+    public function checkMatch(array $match): void
+    {
+        if (is_callable($match['target'])) {
+            call_user_func_array($match['target'], $match['params']);
         }
     }
 

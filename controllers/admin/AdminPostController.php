@@ -23,7 +23,7 @@ class AdminPostController extends MainController{
             $form = $this->checkDataPostForm($_POST);
             if(isset($modify)) $form['form']['id'] = $post[0]['id'];
             $image = $this->checkImage($_FILES);
-            $error_image = !is_string($image) ? null : $image;
+            $error_image = !isset($image[0]) ? null : $image;
             if (!$form['errors'] && !is_string($image)) {
                 $path_image = $this->uploadImage($image);
                 if(isset($modify)){
@@ -33,7 +33,7 @@ class AdminPostController extends MainController{
                 }
             }
         }
-        $this->renderAddPage($form ?? [], $error_image ?? false, $res ?? false, $modify ?? false, $resMod ?? false);
+        $this->renderAddPage($form ?? [], $error_image ?? [], $res ?? false, $modify ?? false, $resMod ?? false);
     }
 
     public function modifyPost(string $id): void
@@ -44,7 +44,7 @@ class AdminPostController extends MainController{
     }
 
     // $this->main_view = ./views/main.html/twig and is define in MainController
-    public function renderAddPage(array $form, bool $error_image, bool $retourAdd, bool $mod, bool $retourMod): void
+    public function renderAddPage(array $form, array $error_image, bool $retourAdd, bool $mod, bool $retourMod): void
     {
         echo $this->twig->render($this->main_view, [
             'body' => 'twig/admin/AddPost.html.twig',
@@ -102,17 +102,17 @@ class AdminPostController extends MainController{
     {
         $image = $image['image'];
         if($image['error'] == 4){
-            return $res['error'] = 'Veuillez renseigner une image';
+            return $res['error'] = ['Veuillez renseigner une image'];
         } else if($image['size'] > 10485760){ // 10 
-            return $res['error'] = 'Image trop grande';
+            return $res['error'] = ['Image trop grande'];
         } else if ($image['type'] != 'image/jpeg' && $image['type'] != 'image/jpg' && $image['type'] != 'image/png' && $image['type'] != 'application/pdf'){
-            return $res['error'] = 'Extension d\'image non autorisé';
+            return $res['error'] = ['Extension d\'image non autorisé'];
         } else {
             return $image;
         }
     }
 
-    private function uploadImage($image): ?string
+    private function uploadImage(array $image): ?string
     {
         $uploadDir = 'ressources/img/';
         $fileNameCmps = explode(".", $image['name']);
