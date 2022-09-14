@@ -4,7 +4,8 @@ namespace App;
 
 class Config{
 
-    protected function getCredits(){
+    protected function getCredits(): ?array
+    {
         $credits = [
             'host' => 'localhost',
             'db_name' => 'p_5',

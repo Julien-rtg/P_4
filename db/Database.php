@@ -13,7 +13,8 @@ class Database extends Config {
         $this->credits = $this->getCredits();
     }
 
-    private function connect(){
+    private function connect(): ?object
+    {
         try {
             $dbh = new \PDO('mysql:host='.$this->credits['host'].';dbname='.$this->credits['db_name'], $this->credits['user'], $this->credits['pass']);
             return $dbh;
@@ -22,19 +23,22 @@ class Database extends Config {
         }
     }
 
-    public function getPDO(){
+    public function getPDO(): ?object
+    {
         $this->pdo = $this->connect();
         return $this->pdo;
     }
 
-    public function query($statement){
+    public function query(string $statement): ?array
+    {
         $pdo = $this->getPDO();
         $req = $pdo->prepare($statement);
         $req->execute();
         return $req->fetchAll();
     }
 
-    public function insert($statement){
+    public function insert(string $statement): ?array
+    {
         $pdo = $this->getPDO();
         $req = $pdo->prepare($statement);
         return $req->execute();
