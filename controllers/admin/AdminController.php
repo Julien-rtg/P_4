@@ -33,7 +33,6 @@ class AdminController extends MainController{
     // $this->main_view = ./views/main.html/twig and is define in MainController
     public function renderAdminPage(array $posts, string $currentPage, string $pages, bool $del): void
     {
-        // var_dump($del);
         echo $this->twig->render($this->main_view, [
             'body' => 'twig/admin/Admin.html.twig',
             'posts' => $posts,

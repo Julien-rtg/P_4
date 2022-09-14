@@ -25,7 +25,8 @@ class MainController{
         $this->role = $this->getRole();
     }
  
-    public function getConnection(){
+    public function getConnection(): ?bool
+    {
         if(!empty($_SESSION)){
             $token = $this->account_model->checkToken($_SESSION['email']);
             if($token[0]['token'] == $_SESSION['token']){
@@ -38,7 +39,8 @@ class MainController{
         }
     }
 
-    public function getRole(){
+    public function getRole(): ?bool
+    {
         if(!empty($_SESSION)){
             $role = $this->account_model->getRole($_SESSION['email']);
             if($role[0]['role'] == 1){

@@ -3,7 +3,8 @@ namespace Controllers\core;
 
 class MailController {
 
-    public function sendMail($datas){
+    public function sendMail(array $datas): ?string
+    {
         $to = 'julien.rittl@gmail.com';
         $subject = $datas['object'];
         $message = 'Nom : ' . $datas['first_name'] . "\r\n";
