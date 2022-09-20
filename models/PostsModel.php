@@ -43,7 +43,7 @@ class PostsModel extends MainModel{
         } 
     }
 
-    public function addPost(string $post, string $path): ?bool
+    public function addPost(array $post, string $path): ?bool
     {
         $query = 'insert into post';
         $query .= ' (`titre`, `image`, `chapo`, `contenu`, `id_utilisateur`)';

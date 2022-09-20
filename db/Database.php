@@ -37,7 +37,7 @@ class Database extends Config {
         return $req->fetchAll();
     }
 
-    public function insert(string $statement): ?array
+    public function insert(string $statement): ?bool
     {
         $pdo = $this->getPDO();
         $req = $pdo->prepare($statement);
