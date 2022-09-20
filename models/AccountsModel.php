@@ -74,15 +74,4 @@ class AccountsModel extends MainModel
         } 
     }
 
-    // public function getUserFromId(string $email): ?array
-    // {
-    //     $stmt = $this->conn->prepare('SELECT nom,prenom FROM utilisateur WHERE email = :email');
-    //     $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-    //     if ($stmt->execute()) {
-    //         return $stmt->fetchAll();
-    //     } else {
-    //         return null;
-    //     } 
-    // }
-
 }

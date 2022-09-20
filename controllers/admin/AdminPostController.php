@@ -114,7 +114,6 @@ class AdminPostController extends MainController{
 
     private function uploadImage(array $image): ?string
     {
-        // var_dump($image);
         $uploadDir = 'ressources/img/';
         $fileNameCmps = explode(".", $image['name']);
         $fileExtension = strtolower(end($fileNameCmps));
