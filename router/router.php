@@ -8,7 +8,7 @@ use Controllers\{
     Page404Controller,
     PostController,
     AccountController,
-    
+    UserAccountController
 };
 use Controllers\admin\{
     AdminController,
@@ -32,6 +32,7 @@ class Router {
         $this->adminAdd = new AdminPostController();
         $this->mainController = new MainController();
         $this->commentaireController = new CommentaireController();
+        $this->userAccountController = new UserAccountController();
     }
 
     public function routeMap(): void
@@ -61,6 +62,11 @@ class Router {
             // map post
             $this->router->map('GET|POST', '/p_4/post', function () {
                 $this->post->post();
+            });
+
+            // map user account
+            $this->router->map('GET|POST', '/p_4/user_account', function () {
+                $this->userAccountController->userAccountPage();
             });
             if($this->mainController->getRole()){
                 // map admin accueil

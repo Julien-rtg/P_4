@@ -62,7 +62,10 @@
                     </div>
                     <div class="creditsCom d-flex justify-content-between">
                         <p class="">{{com.date|date("d/m/Y")}}</p>
-                        <p><span class="me-1">{{com.nom}} </span> {{com.prenom}}</p>
+                        <div class="divPhotoUserCom">
+                            <img src="./ressources/img/{{com.photo}}" alt="">
+                            <p><span class="me-1">{{com.nom}} </span> {{com.prenom}}</p>
+                        </div>
                     </div>
                     <hr class="hrPost">
                 {% endfor %}

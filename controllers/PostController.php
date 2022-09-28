@@ -5,7 +5,7 @@ namespace Controllers;
 use Controllers\core\MainController;
 use Models\{
     PostsModel,
-    CommentairesModel,
+    CommentsModel,
     AccountsModel
 };
 
@@ -18,7 +18,7 @@ class PostController extends MainController
     public function post(): void
     {
         $this->postModel = new PostsModel();
-        $this->comModel = new CommentairesModel();
+        $this->comModel = new CommentsModel();
         $this->accModel = new AccountsModel();
         $id_user = $_SESSION['id'];
         $id_post = $_GET['id'];

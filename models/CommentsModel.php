@@ -5,7 +5,7 @@ namespace Models;
 use Models\core\MainModel;
 use PDO;
 
-class CommentairesModel extends MainModel
+class CommentsModel extends MainModel
 {
 
     public function getUnvalidateComment(): ?array
@@ -18,7 +18,7 @@ class CommentairesModel extends MainModel
     }
     public function getCommentaire(string $id_post): ?array
     {
-        $query = 'select distinct commentaire.id,commentaire.id_post,commentaire.id_utilisateur, commentaire.contenu, commentaire.date, utilisateur.nom, utilisateur.prenom from commentaire';
+        $query = 'select distinct commentaire.id,commentaire.id_post,commentaire.id_utilisateur, commentaire.contenu, commentaire.date, utilisateur.nom, utilisateur.prenom, utilisateur.photo from commentaire';
         $query .= ' inner join utilisateur on commentaire.id_utilisateur = utilisateur.id';
         $query .= ' inner join post on commentaire.id_post = ' . $id_post;
         $query .= ' where commentaire.valider = 1';
