@@ -14,25 +14,25 @@
         <div class="row">
             <div class="col-6">
                 <div class="form-group mb-3">
-                    {% if form['form']['last_name'] %} {# Si il y a une erreur dans le formulaire on reinsère la valeur dans l'input #}
-                        <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Nom" value="{{form['form']['last_name']}}">
+                    {% if form['form']['first_name'] %} {# Si il y a une erreur dans le formulaire on reinsère la valeur dans l'input #}
+                        <input type="text" name="first_name" id="first_name" class="form-control" placeholder="Nom" value="{{form['form']['first_name']}}">
                     {% else %}
-                        <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Nom">
+                        <input type="text" name="first_name" id="first_name" class="form-control" placeholder="Nom">
                     {% endif %}
-                    {% if form['errors']['last_name'] %}
-                        <span class="badge bg-danger">{{form['errors']['last_name']}}</span>
+                    {% if form['errors']['first_name'] %}
+                        <span class="badge bg-danger">{{form['errors']['first_name']}}</span>
                     {% endif %}
                 </div>
             </div>
             <div class="col-6">
                 <div class="form-group mb-3">
-                    {% if form['form']['first_name'] %} {# Si il y a une erreur dans le formulaire on reinsère la valeur dans l'input #}
-                        <input type="text" name="first_name" id="first_name" class="form-control" placeholder="Prénom" value="{{form['form']['first_name']}}">
+                    {% if form['form']['last_name'] %} {# Si il y a une erreur dans le formulaire on reinsère la valeur dans l'input #}
+                        <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Prénom" value="{{form['form']['last_name']}}">
                     {% else %}
-                        <input type="text" name="first_name" id="first_name" class="form-control" placeholder="Prénom">
+                        <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Prénom">
                     {% endif %}
-                    {% if form['errors']['first_name'] %}
-                        <span class="badge bg-danger">{{form['errors']['first_name']}}</span>
+                    {% if form['errors']['last_name'] %}
+                        <span class="badge bg-danger">{{form['errors']['last_name']}}</span>
                     {% endif %}
                 </div>
             </div>
